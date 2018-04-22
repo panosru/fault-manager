@@ -20,7 +20,9 @@ RMT
 
 # Unit test / coverage reports
 phpunit.xml
-tests/coverage/*
+tests/coverage/html/*
+tests/coverage/coverage.serialized
+tests/coverage/testdox.html
 .coverage
 .tox
 
