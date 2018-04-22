@@ -1,5 +1,5 @@
 {
-  "name": "omega/fault-manager",
+  "name": "omegad-biz/fault-manager",
   "description": "Fault Manager library by Omega Business Development",
   "type": "library",
   "keywords": ["error handling", "exception handling", "error", "exception", "handler"],
