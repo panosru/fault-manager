@@ -10,15 +10,14 @@ declare(strict_types=1);
 
 namespace Omega\FaultManager\Exceptions;
 
+use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException;
+
 /**
  * Class IncompatibleErrorNameException
  * @package Omega\FaultManager\Exceptions
  */
-class IncompatibleErrorNameException extends OmegaException
+class IncompatibleErrorNameException extends AFaultManagerException
 {
-    /** @var string */
-    public const EXCEPTION_CLASS_END = 'Exception';
-
     /** @var int */
     protected $code = 66003;
 

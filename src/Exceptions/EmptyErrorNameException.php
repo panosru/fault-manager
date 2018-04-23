@@ -10,12 +10,14 @@ declare(strict_types=1);
 
 namespace Omega\FaultManager\Exceptions;
 
+use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException;
+
 /**
  * Class EmptyErrorNameException
  * @package Omega\FaultManager\Exceptions
  * @codeCoverageIgnore
  */
-class EmptyErrorNameException extends OmegaException
+class EmptyErrorNameException extends AFaultManagerException
 {
     /** @var int */
     protected $code = 66002;
