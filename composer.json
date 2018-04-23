@@ -22,7 +22,6 @@
     "mockery/mockery": "^1.0"
   },
   "require-dev": {
-    "ext-xdebug": "2.7.0alpha1",
     "phpunit/phpunit": "^7.1",
     "symfony/var-dumper": "^4.0"
   },
@@ -30,5 +29,9 @@
     "psr-4": {
       "Omega\\FaultManager\\": "src/"
     }
+  },
+  "scripts": {
+    "test": "phpunit --colors=always",
+    "test-coverage": "phpunit --colors=always --coverage-clover tests/coverage/clover.xml"
   }
 }
