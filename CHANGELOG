@@ -2,6 +2,9 @@
 VERSION 1  INITIAL RELEASE
 ==========================
 
+   Version 1.1 - Added Hoa\Event support
+      23/04/2018 19:55  1.1.0  initial release
+
    Version 1.0 - Initial Release
       23/04/2018 01:51  1.0.3  Added LICENSE
       23/04/2018 01:01  1.0.2  Added .gitkeep under tests/coverage and updated .gitignore
