@@ -16,7 +16,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7.2",
+    "php": "^7.1",
     "hoa/event": "2.17.08.30",
     "hoa/exception": "2.17.08.30",
     "mockery/mockery": "^1.0"
