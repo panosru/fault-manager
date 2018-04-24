@@ -10,7 +10,7 @@ gen### Composer template
 composer.phar
 /vendor/
 local-test.php
-/_compiled/*.php
+_compiled/*.php
 
 # Commit your application's lock file https://getcomposer.org/doc/01-basic-usage.md#commit-your-composer-lock-file-to-version-control
 # You may choose to ignore a library lock file http://getcomposer.org/doc/02-libraries.md#lock-file
@@ -22,6 +22,7 @@ RMT
 
 # Unit test / coverage reports
 phpunit.xml
+tests/_compiled/*.php
 tests/coverage/html/*
 tests/coverage/coverage.serialized
 tests/coverage/testdox.html

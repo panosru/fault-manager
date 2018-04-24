@@ -14,8 +14,17 @@ use PHPUnit\Framework\TestCase;
  */
 class FaultTest extends TestCase
 {
+    /** @var string */
+    private const TESTNIG_CUSTOM_EXCEPTION = 'MyCustomTestingException';
 
-    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    /** @var string */
+    private const TESTING_CUSTOM_EVENT_EXCEPTION = 'MyCustomTestingEventException';
+
+    /** @var array */
+    private $testingFiles;
+
+    /** @var \League\Flysystem\Filesystem */
+    private $fileSystem;
 
     /**
      * @test
@@ -30,46 +39,49 @@ class FaultTest extends TestCase
 
     /**
      * @test
-     * @covers ::throw()
+     * @covers ::exception()
      * @expectedException \BadMethodCallException
      * @expectedExceptionMessage bad method call
      */
     public function throwsExceptionThatIsAlreadyDefined(): void
     {
-        Fault::throw(\BadMethodCallException::class, 'bad method call');
+        throw Fault::exception(\BadMethodCallException::class, 'bad method call');
     }
 
     /**
      * @test
-     * @covers ::throw()
-     * @expectedException \MyCustomException
-     * @expectedExceptionCode 66601
+     * @covers ::exception()
      */
-    public function replaceZeroErrorCodeWhenGeneratingCustomException(): void
+    public function doNotCompileAlreadyDefinedExceptions(): void
     {
-        Fault::throw('MyCustomException', '', 0);
+        Fault::exception(\BadMethodCallException::class);
+        self::assertFalse($this->fileSystem->has($this->testingFiles[self::TESTNIG_CUSTOM_EXCEPTION]));
     }
 
     /**
      * @test
-     * @covers ::throw()
-     * @expectedException \MyNewCustomException
+     * @covers ::exception()
+     * @expectedException \MyCustomTestingException
      * @expectedExceptionMessage custom exception message
-     * @expectedExceptionCode 66666
+     * @expectedExceptionCode 666
      */
     public function throwsCustomException(): void
     {
-        Fault::throw('MyNewCustomException', 'custom exception message', 666);
+        throw Fault::exception(
+            self::TESTNIG_CUSTOM_EXCEPTION,
+            'custom exception message',
+            666
+        );
     }
 
     /**
      * @test
-     * @covers ::throw()
+     * @covers ::exception()
      * @expectedException \Exception
      */
     public function customExceptionsAreInstanceOfPhpBuildInExceptionByDefault(): void
     {
-        Fault::throw('MyCustomException');
+        throw Fault::exception(self::TESTNIG_CUSTOM_EXCEPTION);
     }
 
     /**
@@ -101,54 +113,84 @@ class FaultTest extends TestCase
 
     /**
      * @test
-     * @covers ::throw()
-     * @expectedException \Omega\FaultManager\Exceptions\FaultManagerException
+     * @covers ::exception()
+     * @expectedException \MyCustomTestingEventException
      */
     public function customExceptionIsInstanceOfFaultExceptionWhenEventStreamIsEnabled(): void
     {
         Fault::enableEventStream();
-        Fault::throw('AnotherCustomException');
+        $exception = Fault::exception(self::TESTING_CUSTOM_EVENT_EXCEPTION);
+
+        self::assertInstanceOf(\Omega\FaultManager\Interfaces\FaultManagerException::class, $exception);
+
+        throw $exception;
     }
 
     /**
      * @test
-     * @covers ::throw()
+     * @covers ::exception()
      * @expectedException \Omega\FaultManager\Exceptions\EmptyErrorNameException
      */
-    public function ifNoExceptionNameIsGiven(): void
+    public function throwsExceptionIfNoExceptionNameIsGiven(): void
     {
-        Fault::throw('');
+        throw Fault::exception('');
     }
 
     /**
      * @test
-     * @covers ::throw()
+     * @covers ::exception()
      * @expectedException \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
      */
-    public function ifIncompatibleNameIsGiven(): void
+    public function throwsExceptionIfIncompatibleNameIsGiven(): void
     {
-        Fault::throw('IncompatibleClass');
+        throw Fault::exception('IncompatibleClass');
     }
 
     /**
-     * @test
-     * @covers ::throw()
-     * @expectedException \Omega\FaultManager\Exceptions\FaultManagerException
-     * @expectedExceptionMessage Class 'EverythingGoneWrongMockedClass' could not be instantiated.
+     * @before
+     * @throws ReflectionException
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
-    public function ifEverythingGoneWrong(): void
+    protected function disableFaultEventStreamIfEnabled(): void
     {
-        \Mockery::namedMock('EverythingGoneWrongMockedClass');
-        Fault::throw('EverythingGoneWrongMockedClass');
+        Fault::setCompilePath(dirname(__DIR__) . '/_compiled/');
+        if (Fault::isEventStreamEnabled()) {
+            Fault::disableEventStream();
+        }
+
+        if (null === $this->fileSystem) {
+            $reflector = new \ReflectionClass(Fault::class);
+            $makeFileName = $reflector->getMethod('makeFileName');
+            $makeFileName->setAccessible(true);
+            $fileSystem = $reflector->getMethod('getFileSystem');
+            $fileSystem->setAccessible(true);
+            $this->fileSystem = $fileSystem->invoke($reflector);
+
+            $this->testingFiles[self::TESTNIG_CUSTOM_EXCEPTION] = $makeFileName->invoke(
+                $reflector,
+                self::TESTNIG_CUSTOM_EXCEPTION
+            );
+
+            $this->testingFiles[self::TESTING_CUSTOM_EVENT_EXCEPTION] = $makeFileName->invoke(
+                $reflector,
+                self::TESTING_CUSTOM_EVENT_EXCEPTION
+            );
+        }
     }
 
     /**
      * @after
+     * @throws \League\Flysystem\FileNotFoundException
      */
-    protected function disableFaultEventStream(): void
+    protected function checkIfTestingExceptionAlreadyExistsAndDeleteIt(): void
     {
-        if (Fault::isEventStreamEnabled()) {
-            Fault::disableEventStream();
+        // loop through testing exception files
+        foreach ($this->testingFiles as $file) {
+            // Check if file exists
+            if ($this->fileSystem->has($file)) {
+                // unlink it
+                $this->fileSystem->delete($file);
+            }
         }
     }
 }

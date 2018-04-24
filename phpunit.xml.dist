@@ -2,7 +2,7 @@
 
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.0/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.2/phpunit.xsd"
         backupGlobals="false"
         backupStaticAttributes="false"
         bootstrap="vendor/autoload.php"
@@ -25,7 +25,7 @@
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
         strict="true"
-        verbose="false">
+        verbose="true">
 
     <testsuites>
         <testsuite name="Omega FaultManager Unit Test Suite">
@@ -52,6 +52,9 @@
              highlight="true"
              lowUpperBound="60"
              highLowerBound="95" />
+        <log tyoe="coverage-clover"
+             target="tests/coverage/clover.xml"
+             showUncoveredFiles="true" />
         <log type="coverage-php"
              target="tests/coverage/coverage.serialized"
              showUncoveredFiles="true" />

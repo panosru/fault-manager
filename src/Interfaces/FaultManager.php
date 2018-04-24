@@ -85,4 +85,10 @@ interface FaultManager
      * @return string
      */
     public static function getCompilePath(): string;
+
+    /**
+     * Autoload compiled exceptions
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     */
+    public static function autoloadCompiledExceptions(): void;
 }

@@ -28,6 +28,7 @@ trait FaultGenerator
     {
         if (\file_exists($path) && \is_dir($path) && \is_writable($path)) {
             self::$compiledPath = $path;
+            self::$filesystem->getAdapter()->setPathPrefix($path);
         } else {
             throw new \Omega\FaultManager\Exceptions\InvalidCompilePath($path);
         }
@@ -42,6 +43,16 @@ trait FaultGenerator
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public static function autoloadCompiledExceptions(): void
+    {
+        foreach (self::getFileSystem()->getCompiledExceptions() as $file) {
+            require_once $file;
+        }
+    }
+
+    /**
      * @return Filesystem
      * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
@@ -50,6 +61,7 @@ trait FaultGenerator
         if (null === self::$filesystem) {
             try {
                 self::$filesystem = new Filesystem(new \League\Flysystem\Adapter\Local(self::getCompilePath()));
+                self::$filesystem->addPlugin(new \Omega\FaultManager\Plugins\CompiledExceptions());
             } catch (\LogicException $exception) {
                 throw new \Omega\FaultManager\Exceptions\InvalidCompilePath(self::getCompilePath());
             }
@@ -66,6 +78,14 @@ trait FaultGenerator
     private static function persistFile(string $file, string $contents): void
     {
         self::getFileSystem()->put(self::makeFileName($file), $contents);
+    }
+
+    /**
+     * @param string $path
+     */
+    private static function loadCustomException(string $path): void
+    {
+        require_once $path;
     }
 
     /**

@@ -28,12 +28,34 @@
   },
   "autoload": {
     "classmap": ["_compiled/"],
+    "files": ["src/Autoloader.php"],
     "psr-4": {
       "Omega\\FaultManager\\": "src/"
     }
   },
+  "autoload-dev": {
+    "files": [
+      "tests/TestAutoloader.php"
+    ]
+  },
   "scripts": {
-    "test": "phpunit --colors=always",
-    "test-coverage": "phpunit --colors=always --coverage-clover tests/coverage/clover.xml"
+    "test": [
+      "@compiled-clear-tests",
+      "phpunit --no-coverage"
+    ],
+    "test-coverage": [
+      "@compiled-clear-tests",
+      "phpunit"
+    ],
+    "compiled-clear": "rm -f _compiled/*.php",
+    "compiled-clear-tests": "rm -f tests/_compiled/*.php",
+    "compiled-clear-all": [
+      "@compiled-clear",
+      "@compiled-clear-tests"
+    ]
+  },
+  "scripts-descriptions": {
+    "test": "Running phpunit without coverage",
+    "test-coverage": "Running phpunit with coverage"
   }
 }

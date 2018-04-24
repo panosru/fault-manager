@@ -33,7 +33,6 @@ class Fault implements IFaultManager
     {
     }
 
-
     /**
      * {@inheritdoc}
      */
@@ -78,6 +77,9 @@ class Fault implements IFaultManager
                 $exceptionClass,
                 self::generateFileCode($exceptionClass, $extendFromClass)
             );
+
+            // Load custom generated class
+            self::loadCustomException(self::getFileSystem()->getCompiledExceptions([$exceptionClass])->current());
         }
 
         // Get exceptionClass interfaces
