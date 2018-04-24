@@ -1,0 +1,8 @@
+<?php
+
+class MyCustomTestingEventException extends \Omega\FaultManager\Abstracts\FaultManagerException
+{
+
+
+}
+

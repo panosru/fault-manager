@@ -1,9 +1,14 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:38
  */
+
+namespace Omega\FaultManagerTests;
 
 use Omega\FaultManager\Exceptions\IncompatibleErrorNameException;
 use PHPUnit\Framework\TestCase;

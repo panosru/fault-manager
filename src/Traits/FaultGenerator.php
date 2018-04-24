@@ -22,16 +22,17 @@ trait FaultGenerator
 
     /**
      * @param string $path
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      */
     public static function setCompilePath(string $path): void
     {
-        if (\file_exists($path) && \is_dir($path) && \is_writable($path)) {
-            self::$compiledPath = $path;
-            self::$filesystem->getAdapter()->setPathPrefix($path);
-        } else {
-            throw new \Omega\FaultManager\Exceptions\InvalidCompilePath($path);
+        if (!(\file_exists($path) && \is_dir($path) && \is_writable($path))) {
+            throw new \Omega\FaultManager\Exceptions\InvalidCompilePathException($path);
+
         }
+
+        self::$compiledPath = $path;
+        self::$filesystem->getAdapter()->setPathPrefix($path);
     }
 
     /**
@@ -47,24 +48,32 @@ trait FaultGenerator
      */
     public static function autoloadCompiledExceptions(): void
     {
-        foreach (self::getFileSystem()->getCompiledExceptions() as $file) {
-            require_once $file;
+        /** @var \Generator $files */
+
+        $files = self::getFileSystem()->getCompiledExceptions();
+        while ($file = $files->current()) {
+            self::loadCustomException($file);
+            $files->next();
         }
     }
 
     /**
      * @return Filesystem
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      */
     private static function getFileSystem(): Filesystem
     {
         if (null === self::$filesystem) {
+            // That is trigger by autoloader, thus is not available for testing in unit tests
+            // but that's not big of a deal since if it was faulty then nothing would work :P
+            // @codeCoverageIgnoreStart
             try {
                 self::$filesystem = new Filesystem(new \League\Flysystem\Adapter\Local(self::getCompilePath()));
                 self::$filesystem->addPlugin(new \Omega\FaultManager\Plugins\CompiledExceptions());
             } catch (\LogicException $exception) {
-                throw new \Omega\FaultManager\Exceptions\InvalidCompilePath(self::getCompilePath());
+                throw new \Omega\FaultManager\Exceptions\InvalidCompilePathException(self::getCompilePath());
             }
+            // @codeCoverageIgnoreEnd
         }
 
         return self::$filesystem;
@@ -73,7 +82,7 @@ trait FaultGenerator
     /**
      * @param string $file
      * @param string $contents
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      */
     private static function persistFile(string $file, string $contents): void
     {

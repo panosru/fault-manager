@@ -12,7 +12,11 @@ namespace Omega\FaultManager\Exceptions;
 
 use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException;
 
-class InvalidCompilePath extends AFaultManagerException
+/**
+ * Class InvalidCompilePathException
+ * @package Omega\FaultManager\Exceptions
+ */
+class InvalidCompilePathException extends AFaultManagerException
 {
     /** @var int */
     protected $code = 66004;
@@ -21,7 +25,7 @@ class InvalidCompilePath extends AFaultManagerException
     protected $message = 'Path "%s" does not exist or is not writable.';
 
     /**
-     * InvalidCompilePath constructor.
+     * InvalidCompilePathException constructor.
      * @param string $path
      */
     public function __construct(string $path)

@@ -1,18 +1,23 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:38
  */
 
+namespace Omega\FaultManagerTests;
+
 use Omega\FaultManager\Exceptions\FaultManagerException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class OmegaExceptionTest
+ * Class FaultManagerExceptionTest
  * @coversDefaultClass \Omega\FaultManager\Exceptions\FaultManagerException
  */
-class OmegaExceptionTest extends TestCase
+class FaultManagerExceptionTest extends TestCase
 {
     /**
      * @test

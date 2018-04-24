@@ -23,6 +23,7 @@
     "zendframework/zend-code": "^3.3"
   },
   "require-dev": {
+    "mockery/mockery": "^1.0",
     "phpunit/phpunit": "^7.1",
     "symfony/var-dumper": "^4.0"
   },
@@ -34,9 +35,10 @@
     }
   },
   "autoload-dev": {
-    "files": [
-      "tests/TestAutoloader.php"
-    ]
+    "files": ["tests/TestAutoloader.php"],
+    "psr-4": {
+      "Omega\\FaultManagerTests\\": "tests/unit/"
+    }
   },
   "scripts": {
     "test": [

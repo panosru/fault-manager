@@ -15,6 +15,7 @@ use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException
 /**
  * Class FaultManagerException
  * @package Omega\FaultManager\Exceptions
+ * @codeCoverageIgnore
  */
 class FaultManagerException extends AFaultManagerException
 {

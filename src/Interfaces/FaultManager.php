@@ -24,7 +24,7 @@ interface FaultManager
      * @throws \Omega\FaultManager\Exceptions\FaultManagerException
      * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
      * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      * @throws \ReflectionException
      */
     public static function exception(
@@ -46,7 +46,7 @@ interface FaultManager
      * @throws \Omega\FaultManager\Exceptions\FaultManagerException
      * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
      * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      * @throws \ReflectionException
      */
     public static function throw(
@@ -76,7 +76,7 @@ interface FaultManager
     /**
      * Set compile path
      * @param string $path
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      */
     public static function setCompilePath(string $path): void;
 
@@ -88,7 +88,7 @@ interface FaultManager
 
     /**
      * Autoload compiled exceptions
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      */
     public static function autoloadCompiledExceptions(): void;
 }

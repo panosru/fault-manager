@@ -16,6 +16,12 @@ use Omega\FaultManager\Interfaces\FaultManagerException as IFaultManagerExceptio
 
 class CompiledExceptions implements IPluginInterface
 {
+    /** @var bool */
+    public const RETURN_IN_ARRAY = true;
+
+    /** @var bool */
+    public const RETURN_NOT_IN_ARRAY = false;
+
     /** @var IFilesystemInterface */
     protected $filesystem;
 

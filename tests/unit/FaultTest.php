@@ -1,9 +1,14 @@
 <?php
+
+declare(strict_types = 1);
+
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:29
  */
+
+namespace Omega\FaultManagerTests;
 
 use Omega\FaultManager\Fault;
 use PHPUnit\Framework\TestCase;
@@ -61,6 +66,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
+     * @covers ::getFileSystem()
      * @expectedException \MyCustomTestingException
      * @expectedExceptionMessage custom exception message
      * @expectedExceptionCode 666
@@ -147,9 +153,147 @@ class FaultTest extends TestCase
     }
 
     /**
+     * @test
+     * @covers ::exception()
+     * @expectedException \Omega\FaultManager\Exceptions\FaultManagerException
+     * @expectedExceptionMessage The class "NonThrowableMockException" does not implements Throwable interface.
+     * @expectedExceptionCode 66001
+     */
+    public function classIsNotThrowableThusAnExceptionMustBeThrown(): void
+    {
+        \Mockery::mock('NonThrowableMockException');
+
+        throw Fault::exception('NonThrowableMockException');
+    }
+
+    /**
+     * @test
+     * @covers ::throw()
+     * @expectedException \Exception
+     * @expectedExceptionMessage bad message
+     * @expectedExceptionCode 0
+     */
+    public function checkThrowsMethod(): void
+    {
+        Fault::throw(\Exception::class, 'bad message');
+    }
+
+    /**
+     * @test
+     * @covers ::throw()
+     * @expectedException \MyCustomTestingEventException
+     * @expectedExceptionMessage hello world
+     * @expectedExceptionCode 66000
+     */
+    public function throwEventExceptionWithArguments(): void
+    {
+        Fault::enableEventStream();
+        Fault::throw(
+            self::TESTING_CUSTOM_EVENT_EXCEPTION,
+            'hello %s',
+            0,
+            null,
+            ['world']
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::setCompilePath()
+     * @covers ::getCompilePath()
+     */
+    public function checkCompilePath(): void
+    {
+        Fault::setCompilePath(__DIR__);
+        self::assertEquals(__DIR__, Fault::getCompilePath());
+    }
+
+    /**
+     * @test
+     * @covers ::setCompilePath()
+     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @expectedExceptionMessage Path "/some/invalid/path" does not exist or is not writable.
+     * @expectedExceptionCode 66004
+     */
+    public function handleInvalidPath(): void
+    {
+        Fault::setCompilePath('/some/invalid/path');
+    }
+
+    /**
+     * @test
+     * @covers ::autoloadCompiledExceptions()
+     * @covers ::loadCustomException()
+     * @runInSeparateProcess
+     */
+    public function checkAutoloader(): void
+    {
+        $path = \dirname(__DIR__) . '/_support/';
+        // Generate two exceptions without Fault
+        $this->fileSystem->put(
+            self::TESTNIG_CUSTOM_EXCEPTION . '.php',
+            \file_get_contents($path . 'test_exception_generated_code')
+        );
+        $this->fileSystem->put(
+            self::TESTING_CUSTOM_EVENT_EXCEPTION . '.php',
+            \file_get_contents($path . 'test_event_exception_generated_code')
+        );
+
+        // Make sure that files exist
+        self::assertTrue($this->fileSystem->has(self::TESTNIG_CUSTOM_EXCEPTION . '.php'));
+        self::assertTrue($this->fileSystem->has(self::TESTING_CUSTOM_EVENT_EXCEPTION . '.php'));
+
+        // Generated exceptions are not loaded yet
+        self::assertFalse(\class_exists(self::TESTNIG_CUSTOM_EXCEPTION, false));
+        self::assertFalse(\class_exists(self::TESTING_CUSTOM_EVENT_EXCEPTION, false));
+
+        Fault::autoloadCompiledExceptions();
+
+        // Generated exceptions should now be available
+        self::assertTrue(\class_exists(self::TESTNIG_CUSTOM_EXCEPTION, false));
+        self::assertTrue(\class_exists(self::TESTING_CUSTOM_EVENT_EXCEPTION, false));
+    }
+
+    /**
+     * @test
+     * @covers ::getFileSystem()
+     * @covers ::makeFileName()
+     * @covers ::persistFile()
+     * @covers ::loadCustomException()
+     * @covers ::generateFileCode()
+     * @runInSeparateProcess
+     */
+    public function checkCompiler(): void
+    {
+        // Generate \Exception
+        Fault::exception(self::TESTNIG_CUSTOM_EXCEPTION);
+
+        self::assertTrue($this->fileSystem->has(
+            self::TESTNIG_CUSTOM_EXCEPTION . '.php'
+        ));
+
+        self::assertEquals(
+            \md5_file(\dirname(__DIR__) . '/_support/test_exception_generated_code'),
+            \md5_file(Fault::getCompilePath() . self::TESTNIG_CUSTOM_EXCEPTION . '.php')
+        );
+
+        Fault::enableEventStream();
+        Fault::exception(self::TESTING_CUSTOM_EVENT_EXCEPTION);
+
+        self::assertTrue($this->fileSystem->has(
+            self::TESTING_CUSTOM_EVENT_EXCEPTION . '.php'
+        ));
+
+        self::assertEquals(
+            \md5_file(\dirname(__DIR__) . '/_support/test_event_exception_generated_code'),
+            \md5_file(Fault::getCompilePath() . self::TESTING_CUSTOM_EVENT_EXCEPTION . '.php')
+        );
+    }
+
+    /**
      * @before
-     * @throws ReflectionException
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @throws \ReflectionException
      */
     protected function disableFaultEventStreamIfEnabled(): void
     {
