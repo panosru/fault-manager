@@ -18,5 +18,6 @@ use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException
  */
 class FaultManagerException extends AFaultManagerException
 {
-
+    /** @var int */
+    protected $code = 66001;
 }

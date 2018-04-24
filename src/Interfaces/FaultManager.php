@@ -13,25 +13,49 @@ namespace Omega\FaultManager\Interfaces;
 interface FaultManager
 {
     /**
-     * @param string $class
-     * @param null|string $message
+     * @param string $exceptionClass
+     * @param string $message
      * @param int $code
      * @param null|\Throwable $previous
      * @param array $arguments
+     * @return \Throwable
+     * @throws \Throwable
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
      * @throws \Omega\FaultManager\Exceptions\FaultManagerException
      * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
      * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
-     * @throws \Exception
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      * @throws \ReflectionException
-     * @throws \Throwable
      */
-    public static function throw(
-        string $class,
+    public static function exception(
+        string $exceptionClass,
         string $message = '',
         int $code = 0,
         ?\Throwable $previous = null,
         array $arguments = []
-    );
+    ): \Throwable;
+
+    /**
+     * @param string $exceptionClass
+     * @param string $message
+     * @param int $code
+     * @param null|\Throwable $previous
+     * @param array $arguments
+     * @throws \Throwable
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
+     * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \ReflectionException
+     */
+    public static function throw(
+        string $exceptionClass,
+        string $message = '',
+        int $code = 0,
+        ?\Throwable $previous = null,
+        array $arguments = []
+    ): void;
 
     /**
      * Enables Event Stream for Exceptions
@@ -48,4 +72,17 @@ interface FaultManager
      * @return bool
      */
     public static function isEventStreamEnabled(): bool;
+
+    /**
+     * Set compile path
+     * @param string $path
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     */
+    public static function setCompilePath(string $path): void;
+
+    /**
+     * Get compile path
+     * @return string
+     */
+    public static function getCompilePath(): string;
 }

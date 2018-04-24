@@ -15,7 +15,7 @@ use Omega\FaultManager\Interfaces\FaultManagerException as IFaultManagerExceptio
 abstract class FaultManagerException extends \Hoa\Exception\Exception implements IFaultManagerException
 {
     /** @var int */
-    protected $code = self::ERROR_CODE_DEFAULT;
+    protected $code = 66000;
 
     /** @var string */
     protected $message = '';

@@ -14,13 +14,4 @@ interface FaultManagerException
 {
     /** @var string */
     public const EXCEPTION_CLASS_END = 'Exception';
-
-    /** @var int */
-    public const ERROR_CODE_PREFIX = 66;
-
-    /** @var int */
-    public const ERROR_CODE_GENERATED = 601;
-
-    /** @var int */
-    public const ERROR_CODE_DEFAULT = 66001;
 }
