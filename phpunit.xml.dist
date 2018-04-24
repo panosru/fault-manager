@@ -40,6 +40,9 @@
         </blacklist>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
+            <exclude>
+                <directory suffix="Autoloader.php">src</directory>
+            </exclude>
         </whitelist>
     </filter>
 
