@@ -7,6 +7,4 @@ declare(strict_types=1);
  * Time: 12:40
  */
 
-require_once dirname(__DIR__) . '/vendor/autoload.php';
-
 \Omega\FaultManager\Fault::autoloadCompiledExceptions();
