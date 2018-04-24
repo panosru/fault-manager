@@ -52,7 +52,7 @@
              highlight="true"
              lowUpperBound="60"
              highLowerBound="95" />
-        <log tyoe="coverage-clover"
+        <log type="coverage-clover"
              target="tests/coverage/clover.xml"
              showUncoveredFiles="true" />
         <log type="coverage-php"
