@@ -19,7 +19,7 @@
     "php": "^7.1",
     "hoa/event": "2.17.08.30",
     "hoa/exception": "2.17.08.30",
-    "league/flysystem": "^1.0",
+    "league/flysystem": "^1.0.44",
     "zendframework/zend-code": "^3.3"
   },
   "require-dev": {
