@@ -2,6 +2,9 @@
 VERSION 1  INITIAL RELEASE
 ==========================
 
+   Version 1.2 - Generated exceptions are now compiled
+      25/04/2018 00:00  1.2.0  initial release
+
    Version 1.1 - Added Hoa\Event support
       23/04/2018 19:55  1.1.0  initial release
 
