@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6c39d86063aed44614c62664ea346279",
+    "content-hash": "7a62c093125e44585e4d59474c27965d",
     "packages": [
         {
             "name": "hoa/consistency",
