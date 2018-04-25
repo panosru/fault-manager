@@ -29,13 +29,12 @@
   },
   "autoload": {
     "classmap": ["_compiled/"],
-    "files": ["src/Autoloader.php"],
+    "files": ["autoload.php"],
     "psr-4": {
       "Omega\\FaultManager\\": "src/"
     }
   },
   "autoload-dev": {
-    "files": ["tests/TestAutoloader.php"],
     "psr-4": {
       "Omega\\FaultManagerTests\\": "tests/unit/"
     }
