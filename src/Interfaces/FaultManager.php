@@ -47,6 +47,7 @@ interface FaultManager
      * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
      * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
      * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @throws \Omega\FaultManager\Exceptions\NamespacedErrorException
      * @throws \ReflectionException
      */
     public static function throw(

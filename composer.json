@@ -48,8 +48,8 @@
       "@compiled-clear-tests",
       "phpunit"
     ],
-    "compiled-clear": "rm -f _compiled/*.php",
-    "compiled-clear-tests": "rm -f tests/_compiled/*.php",
+    "compiled-clear": "find _compiled/* ! -name '.gitkeep' | xargs rm -rf",
+    "compiled-clear-tests": "find tests/_compiled/* ! -name '.gitkeep' | xargs rm -rf",
     "compiled-clear-all": [
       "@compiled-clear",
       "@compiled-clear-tests"

@@ -25,6 +25,9 @@ class FaultTest extends TestCase
     /** @var string */
     private const TESTING_CUSTOM_EVENT_EXCEPTION = 'MyCustomTestingEventException';
 
+    /** @var string */
+    private const TESTING_CUSTOM_NAMESPACED_EXCEPTION = 'MyCustomNamespace\MyCustomException';
+
     /** @var array */
     private $testingFiles;
 
@@ -130,6 +133,16 @@ class FaultTest extends TestCase
         self::assertInstanceOf(\Omega\FaultManager\Interfaces\FaultManagerException::class, $exception);
 
         throw $exception;
+    }
+
+    /**
+     * @test
+     * @covers ::exception()
+     * @expectedException \Omega\FaultManager\Exceptions\NamespacedErrorException
+     */
+    public function throwsExceptionIfNamespacedCustomExceptionIsProvided(): void
+    {
+        throw Fault::exception(self::TESTING_CUSTOM_NAMESPACED_EXCEPTION);
     }
 
     /**

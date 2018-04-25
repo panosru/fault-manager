@@ -48,6 +48,11 @@ class Fault implements IFaultManager
             throw new Exceptions\EmptyErrorNameException();
         }
 
+        // Check if is namespace
+        if (false !== \strpos($exceptionClass, '\\')) {
+            throw new Exceptions\NamespacedErrorException();
+        }
+
         $params = [$message, $code, $previous];
 
         // Check if exceptionClass with that name already exists
