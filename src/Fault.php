@@ -106,7 +106,39 @@ class Fault implements IFaultManager
             $params[] = $arguments;
         }
 
-        return (new \ReflectionClass($exceptionClass))->newInstanceArgs($params);
+        // Get exception instance
+        /** @var \Throwable $exception */
+        $exception = (new \ReflectionClass($exceptionClass))->newInstanceArgs($params);
+
+        // Get exception reflection
+        $reflection = new \ReflectionObject($exception);
+
+        if ($reflection->hasProperty('trace')) {
+            // When running PHPUnit property "trace" is not available, works fine though in real world...
+            // Maybe an xdebug issue?
+            // @codeCoverageIgnoreStart
+            // Get trace
+            $trace = $reflection->getProperty('trace');
+            $trace->setAccessible(true);
+
+            // Get stack trace
+            $stackTrace = $trace->getValue($exception);
+            // Remove first in stack because it refers to ReflectionClass::newInstanceArgs() we called previously
+            \array_shift($stackTrace);
+            $trace->setValue($exception, $stackTrace);
+
+            // Set "file" and "line" properties
+            $file = $reflection->getProperty('file');
+            $file->setAccessible(true);
+            $file->setValue($exception, $stackTrace[0]['file']);
+
+            $line = $reflection->getProperty('line');
+            $line->setAccessible(true);
+            $line->setValue($exception, $stackTrace[0]['line']);
+            // @codeCoverageIgnoreEnd
+        }
+
+        return $exception;
     }
 
     /**
