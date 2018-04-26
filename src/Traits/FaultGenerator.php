@@ -26,6 +26,9 @@ trait FaultGenerator
      */
     public static function setCompilePath(string $path): void
     {
+        // Add trailing slash in case is not present (the shortcut way)
+        $path = \rtrim($path, \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR;
+
         if (!(\file_exists($path) && \is_dir($path) && \is_writable($path))) {
             throw new \Omega\FaultManager\Exceptions\InvalidCompilePathException($path);
 

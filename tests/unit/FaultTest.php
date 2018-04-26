@@ -218,14 +218,14 @@ class FaultTest extends TestCase
     public function checkCompilePath(): void
     {
         Fault::setCompilePath(__DIR__);
-        self::assertEquals(__DIR__, Fault::getCompilePath());
+        self::assertEquals(__DIR__ . \DIRECTORY_SEPARATOR, Fault::getCompilePath());
     }
 
     /**
      * @test
      * @covers ::setCompilePath()
      * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePathException
-     * @expectedExceptionMessage Path "/some/invalid/path" does not exist or is not writable.
+     * @expectedExceptionMessage Path "/some/invalid/path/" does not exist or is not writable.
      * @expectedExceptionCode 66004
      */
     public function handleInvalidPath(): void
