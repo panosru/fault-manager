@@ -22,7 +22,7 @@ composer require omegad-biz/fault-manager
 
 ### Contributing & Code of Conduct
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our [code of conduct](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
+Please read [CONTRIBUTING](CONTRIBUTING.md) for details on our [code of conduct](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
 
 ### Versioning
 

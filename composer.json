@@ -39,22 +39,20 @@
       "Omega\\FaultManagerTests\\": "tests/unit/"
     }
   },
+  "bin": ["bin/file-manager"],
   "scripts": {
     "post-update-cmd": "@compiled-clear-all",
     "test": [
       "@compiled-clear-tests",
-      "phpunit --no-coverage"
+      "bin/file-manager -t"
     ],
     "test-coverage": [
       "@compiled-clear-tests",
-      "phpunit"
+      "bin/file-manager -T"
     ],
-    "compiled-clear": "find _compiled/* ! -name '.gitkeep' | xargs rm -rf",
-    "compiled-clear-tests": "find tests/_compiled/* ! -name '.gitkeep' | xargs rm -rf",
-    "compiled-clear-all": [
-      "@compiled-clear",
-      "@compiled-clear-tests"
-    ]
+    "compiled-clear": "bin/file-manager -c",
+    "compiled-clear-tests": "bin/file-manager -C",
+    "compiled-clear-all": "bin/file-manager -X"
   },
   "scripts-descriptions": {
     "test": "Running phpunit without coverage",
