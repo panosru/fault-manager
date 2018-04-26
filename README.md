@@ -7,7 +7,7 @@ A convinient way for exception handling and generating on the fly non-existing e
 [![version][version-badge]][package] [![downloads][downloads-badge]][downloads]
 [![MIT License][license-badge]][license]
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg)](CONTRIBUTING.md)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](CONTRIBUTORS.md)
 [![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
