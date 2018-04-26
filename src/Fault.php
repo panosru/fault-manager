@@ -53,7 +53,7 @@ class Fault implements IFaultManager
             throw new Exceptions\NamespacedErrorException();
         }
 
-        $params = [$message, $code, $previous];
+        $params = [&$message, $code, $previous];
 
         // Check if exceptionClass with that name already exists
         // we mute class_exists because we leave second parameter as a default (which is true by default)
@@ -100,10 +100,15 @@ class Fault implements IFaultManager
             );
         }
 
-        // Check if exceptionClass implements FaultManagerException interface
-        if (\in_array(Interfaces\FaultManagerException::class, $interfaces, true)) {
+        // Check if exceptionClass implements FaultManagerException interface or if is a Hoa\Exception
+        if (\in_array(Interfaces\FaultManagerException::class, $interfaces, true) ||
+            \in_array('Hoa\Exception', $interfaces, true)
+        ) {
             // Then we pass $arguments as fourth parameter for constructor
             $params[] = $arguments;
+        } elseif (0 < \count($arguments)) {
+            // if there are arguments set then format the exception message
+            $message = @vsprintf($message, $arguments);
         }
 
         // Get exception instance

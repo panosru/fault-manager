@@ -181,6 +181,17 @@ class FaultTest extends TestCase
 
     /**
      * @test
+     * @covers ::exception()
+     * @expectedException \Exception
+     * @expectedExceptionMessage bad message
+     */
+    public function interpolateNonEventExceptionMessage(): void
+    {
+        throw Fault::exception(\Exception::class, 'bad %s', 0, null, ['message']);
+    }
+
+    /**
+     * @test
      * @covers ::throw()
      * @expectedException \Exception
      * @expectedExceptionMessage bad message
