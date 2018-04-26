@@ -12,7 +12,8 @@ A convinient way for exception handling and generating on the fly non-existing e
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
-### Installing
+
+## Installing
 
 ```
 composer require omegad-biz/fault-manager
@@ -20,24 +21,38 @@ composer require omegad-biz/fault-manager
 
 *Usage examples & documentation coming soon.*
 
-### Contributing & Code of Conduct
+## Contributing & Code of Conduct
 
 Please read [CONTRIBUTING](CONTRIBUTING.md) for details on our [code of conduct](CODE_OF_CONDUCT.md), and the process for submitting pull requests to us.
 
-### Versioning
+## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/omegad-biz/fault-manager/tags). 
 
-### Authors
+## Authors
 
 * **Panagiotis Kosmidis (AKA @panosru)**
 
 See also the list of [contributors](CONTRIBUTORS.md) who participated in this project.
 
-### License
+## Built With
+
+* [Hoa\Exception](https://hoa-project.net/En/Literature/Hack/Exception.html) - Advanced exceptions
+* [Hoa\Event](https://hoa-project.net/En/Literature/Hack/Event.html) - Used as event listener
+* [zend-code](https://docs.zendframework.com/zend-code/) - Used for custom exception object generation
+* [Flysystem](http://flysystem.thephpleague.com/docs/) - Used for file-handling manipulation
+* [PHPUnit](https://phpunit.readthedocs.io/en/7.1/index.html) - Used for unit testing
+* [Mockery](http://docs.mockery.io/en/latest/index.html) - Used for objects mocking
+* [RMT - Release Management Tool](https://github.com/liip/RMT) - Used for project versioning
+* [all-contributors-cli](https://www.npmjs.com/package/all-contributors-cli) - Used to add/generate contributors list
+
+## Acknowledgment
+
+* Oskar Schöldström (@oxyc), [script.sh](https://github.com/oxyc/bash-boilerplate/blob/master/script.sh)
+
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
-
 
 [build-badge]: https://secure.travis-ci.org/omegad-biz/fault-manager.svg?branch=master
 [build]: https://secure.travis-ci.org/omegad-biz/fault-manager
