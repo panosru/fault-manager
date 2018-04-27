@@ -24,6 +24,9 @@ class Fault implements IFaultManager
 
     /** @var bool */
     private static $eventStreamEnabled = false;
+
+    /** @var bool */
+    private static $clearThrowFromTrace = false;
     
     /**
      * Fault constructor.
@@ -122,13 +125,10 @@ class Fault implements IFaultManager
         // Maybe an xdebug issue?
         // @codeCoverageIgnoreStart
 
-        // Set trace to null by default
-        $trace = null;
-
         // Get trace
         if ($reflection->hasProperty('trace')) {
             $trace = $reflection->getProperty('trace');
-        } elseif ($reflection->hasProperty('_trace')) {
+        } else {
             $parentClass = $reflection->getParentClass();
             // Get parent class \Exception
             while (\Exception::class !== $parentClass->getName()) {
@@ -137,25 +137,28 @@ class Fault implements IFaultManager
             $trace = $parentClass->getProperty('trace');
         }
 
-        if (null !== $trace) {
-            // Get trace
-            $trace->setAccessible(true);
+        // Get trace
+        $trace->setAccessible(true);
 
-            // Get stack trace
-            $stackTrace = $trace->getValue($exception);
-            // Remove first in stack because it refers to ReflectionClass::newInstanceArgs() we called previously
+        // Get stack trace
+        $stackTrace = $trace->getValue($exception);
+        // Remove first in stack because it refers to ReflectionClass::newInstanceArgs() we called previously
+        \array_shift($stackTrace);
+        // Remove 'Fault::throw()' from trace if present
+        if (self::$clearThrowFromTrace) {
             \array_shift($stackTrace);
-            $trace->setValue($exception, $stackTrace);
-
-            // Set "file" and "line" properties
-            $file = $reflection->getProperty('file');
-            $file->setAccessible(true);
-            $file->setValue($exception, $stackTrace[0]['file']);
-
-            $line = $reflection->getProperty('line');
-            $line->setAccessible(true);
-            $line->setValue($exception, $stackTrace[0]['line']);
+            self::$clearThrowFromTrace = false; // Set back to default
         }
+        $trace->setValue($exception, $stackTrace);
+
+        // Set "file" and "line" properties
+        $file = $reflection->getProperty('file');
+        $file->setAccessible(true);
+        $file->setValue($exception, $stackTrace[0]['file']);
+
+        $line = $reflection->getProperty('line');
+        $line->setAccessible(true);
+        $line->setValue($exception, $stackTrace[0]['line']);
         // @codeCoverageIgnoreEnd
 
         return $exception;
@@ -171,6 +174,7 @@ class Fault implements IFaultManager
         ?\Throwable $previous = null,
         array $arguments = []
     ): void {
+        self::$clearThrowFromTrace = true;
         throw self::exception($exceptionClass, $message, $code, $previous, $arguments);
     }
 
