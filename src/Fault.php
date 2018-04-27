@@ -13,6 +13,7 @@ namespace Omega\FaultManager;
 use Omega\FaultManager\Interfaces\FaultManager as IFaultManager;
 use Omega\FaultManager\Traits\FaultEventStream as TFaultEventStream;
 use Omega\FaultManager\Traits\FaultGenerator as TFaultGenerator;
+use Omega\FaultManager\Traits\FaultMutator as TFaultMutator;
 
 /**
  * Class Fault
@@ -23,9 +24,7 @@ class Fault implements IFaultManager
 
     use TFaultGenerator;
     use TFaultEventStream;
-
-    /** @var bool */
-    private static $clearThrowFromTrace = false;
+    use TFaultMutator;
 
     /**
      * Fault constructor.
@@ -117,53 +116,11 @@ class Fault implements IFaultManager
         /** @var \Throwable $exception */
         $exception = (new \ReflectionClass($exceptionClass))->newInstanceArgs($params);
 
-        // Get exception reflection
-        $reflection = new \ReflectionObject($exception);
-
-        // When running PHPUnit property "trace" is not available, works fine though in real world...
-        // Maybe an xdebug issue?
-        // @codeCoverageIgnoreStart
-
-        // Get trace
-        if ($reflection->hasProperty('trace')) {
-            $trace = $reflection->getProperty('trace');
-        } else {
-            $parentClass = $reflection->getParentClass();
-            // Get parent class \Exception
-            while (\Exception::class !== $parentClass->getName()) {
-                $parentClass = $parentClass->getParentClass();
-            }
-            $trace = $parentClass->getProperty('trace');
-        }
-
-        // Get trace
-        $trace->setAccessible(true);
-
-        // Get stack trace
-        $stackTrace = $trace->getValue($exception);
-        // Remove first in stack because it refers to ReflectionClass::newInstanceArgs() we called previously
-        \array_shift($stackTrace);
-        // Remove 'Fault::throw()' from trace if present
-        if (self::$clearThrowFromTrace) {
-            \array_shift($stackTrace);
-            self::$clearThrowFromTrace = false; // Set back to default
-        }
-        $trace->setValue($exception, $stackTrace);
-
-        // Set "file" and "line" properties
-        $file = $reflection->getProperty('file');
-        $file->setAccessible(true);
-        $file->setValue($exception, $stackTrace[0]['file']);
-
-        $line = $reflection->getProperty('line');
-        $line->setAccessible(true);
-        $line->setValue($exception, $stackTrace[0]['line']);
-        // @codeCoverageIgnoreEnd
-
-        if (
-            !($exception instanceof \Hoa\Event\Source) &&
+        if (!($exception instanceof \Hoa\Event\Source) &&
             self::isEventStreamEnabled()
         ) {
+            // Mutate the object
+            self::mutate($exception);
             // Route exceptions that are either PHP build-in or are already predefined and do not
             // have support for FaultManager EventStream
             //TODO: maybe make RouteExceptions plugin to follow Singleton Pattern?
@@ -183,7 +140,6 @@ class Fault implements IFaultManager
         ?\Throwable $previous = null,
         array $arguments = []
     ): void {
-        self::$clearThrowFromTrace = true;
         throw self::exception($exceptionClass, $message, $code, $previous, $arguments);
     }
 }

@@ -12,6 +12,10 @@ namespace Omega\FaultManager\Traits;
 
 use League\Flysystem\Filesystem;
 
+/**
+ * Trait FaultGenerator
+ * @package Omega\FaultManager\Traits
+ */
 trait FaultGenerator
 {
     /** @var string */

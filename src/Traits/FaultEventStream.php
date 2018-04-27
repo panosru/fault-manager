@@ -13,6 +13,10 @@ namespace Omega\FaultManager\Traits;
 use Hoa\Event\Bucket;
 use Hoa\Event\Event;
 
+/**
+ * Trait FaultEventStream
+ * @package Omega\FaultManager\Traits
+ */
 trait FaultEventStream
 {
     /** @var bool */

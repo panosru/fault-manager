@@ -11,9 +11,12 @@ declare(strict_types=1);
 namespace Omega\FaultManager\Abstracts;
 
 use Omega\FaultManager\Interfaces\FaultManagerException as IFaultManagerException;
+use Omega\FaultManager\Traits\FaultMutator as TFaultMutator;
 
 abstract class FaultManagerException extends \Hoa\Exception\Exception implements IFaultManagerException
 {
+    use TFaultMutator;
+
     /** @var int */
     protected $code = 66000;
 
@@ -41,6 +44,23 @@ abstract class FaultManagerException extends \Hoa\Exception\Exception implements
             $code ?? $this->code,
             $arguments ?? $this->arguments,
             $previous
+        );
+    }
+
+    /**
+     * Override parent::send()
+     *
+     * Sends the exception on `hoa://Event/Exception`.
+     * @codeCoverageIgnore
+     */
+    public function send(): void
+    {
+        self::mutate($this);
+
+        \Hoa\Event\Event::notify(
+            'hoa://Event/Exception',
+            $this,
+            new \Hoa\Event\Bucket($this)
         );
     }
 }
