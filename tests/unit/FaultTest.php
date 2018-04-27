@@ -19,6 +19,8 @@ use PHPUnit\Framework\TestCase;
  */
 class FaultTest extends TestCase
 {
+    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+
     /** @var string */
     private const TESTNIG_CUSTOM_EXCEPTION = 'MyCustomTestingException';
 
@@ -315,6 +317,77 @@ class FaultTest extends TestCase
     }
 
     /**
+     * @test
+     * @coversNothing
+     * @expectedException \MyCustomTestingEventException
+     */
+    public function checkIfCustomEventPassedToEventStream(): void
+    {
+        Fault::enableEventStream();
+
+        $exceptionMessage = 'bad message passed to event.';
+        
+        $spy = \Mockery::spy('MySpy')
+            ->shouldReceive('getExceptionData')
+            ->once()
+            ->with($exceptionMessage)
+            ->getMock();
+
+        \Hoa\Event\Event::getEvent('hoa://Event/Exception')
+            ->attach(function (\Hoa\Event\Bucket $bucket) use ($spy, $exceptionMessage) {
+            /** @var \Hoa\Exception\Exception $exception */
+            $exception = $bucket->getData();
+            if (0 === \strcmp($exceptionMessage, $exception->getMessage())) {
+                $spy->getExceptionData($exception->getMessage());
+            }
+        });
+        
+        Fault::throw(
+            self::TESTING_CUSTOM_EVENT_EXCEPTION,
+            'bad message passed to %s.',
+            0,
+            null,
+            ['event']
+        );
+    }
+
+    /**
+     * @test
+     * @covers ::registerEvent()
+     * @covers ::exception()
+     * @expectedException \Exception
+     */
+    public function routeToEventStreamNonEventException(): void
+    {
+        Fault::enableEventStream();
+
+        $exceptionMessage = 'bad message passed to event from non event exception!';
+
+        $spy = \Mockery::spy('MySpy')
+            ->shouldReceive('getExceptionData')
+            ->once()
+            ->with($exceptionMessage)
+            ->getMock();
+
+        \Hoa\Event\Event::getEvent('hoa://Event/Exception')
+            ->attach(function (\Hoa\Event\Bucket $bucket) use ($spy, $exceptionMessage) {
+                /** @var \Hoa\Exception\Exception $exception */
+                $exception = $bucket->getData();
+                if (0 === \strcmp($exceptionMessage, $exception->getMessage())) {
+                    $spy->getExceptionData($exception->getMessage());
+                }
+            });
+
+        Fault::throw(
+            \Exception::class,
+            'bad message passed to %s from %s exception!',
+            0,
+            null,
+            ['event', 'non event']
+        );
+    }
+
+    /**
      * @before
      * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      * @throws \ReflectionException
@@ -322,6 +395,7 @@ class FaultTest extends TestCase
     protected function disableFaultEventStreamIfEnabled(): void
     {
         Fault::setCompilePath(dirname(__DIR__) . '/_compiled/');
+
         if (Fault::isEventStreamEnabled()) {
             Fault::disableEventStream();
         }

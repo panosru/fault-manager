@@ -17,7 +17,6 @@
   },
   "require": {
     "php": "^7.1",
-    "hoa/event": "2.17.08.30",
     "hoa/exception": "2.17.08.30",
     "league/flysystem": "1.0.44",
     "zendframework/zend-code": "^3.3"
@@ -44,15 +43,15 @@
     "post-update-cmd": "@compiled-clear-all",
     "test": [
       "@compiled-clear-tests",
-      "bin/file-manager -t"
+      "bin/fault-manager -t"
     ],
     "test-coverage": [
       "@compiled-clear-tests",
-      "bin/file-manager -T"
+      "bin/fault-manager -T"
     ],
-    "compiled-clear": "bin/file-manager -c",
-    "compiled-clear-tests": "bin/file-manager -C",
-    "compiled-clear-all": "bin/file-manager -X"
+    "compiled-clear": "bin/fault-manager -c",
+    "compiled-clear-tests": "bin/fault-manager -C",
+    "compiled-clear-all": "bin/fault-manager -X"
   },
   "scripts-descriptions": {
     "test": "Running phpunit without coverage",

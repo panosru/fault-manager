@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Omega\FaultManager;
 
 use Omega\FaultManager\Interfaces\FaultManager as IFaultManager;
+use Omega\FaultManager\Traits\FaultEventStream as TFaultEventStream;
 use Omega\FaultManager\Traits\FaultGenerator as TFaultGenerator;
 
 /**
@@ -21,13 +22,11 @@ class Fault implements IFaultManager
 {
 
     use TFaultGenerator;
-
-    /** @var bool */
-    private static $eventStreamEnabled = false;
+    use TFaultEventStream;
 
     /** @var bool */
     private static $clearThrowFromTrace = false;
-    
+
     /**
      * Fault constructor.
      * @codeCoverageIgnore
@@ -161,6 +160,16 @@ class Fault implements IFaultManager
         $line->setValue($exception, $stackTrace[0]['line']);
         // @codeCoverageIgnoreEnd
 
+        if (
+            !($exception instanceof \Hoa\Event\Source) &&
+            self::isEventStreamEnabled()
+        ) {
+            // Route exceptions that are either PHP build-in or are already predefined and do not
+            // have support for FaultManager EventStream
+            //TODO: maybe make RouteExceptions plugin to follow Singleton Pattern?
+            self::registerEvent(new Plugins\RouteExceptions(), $exception);
+        }
+
         return $exception;
     }
 
@@ -176,29 +185,5 @@ class Fault implements IFaultManager
     ): void {
         self::$clearThrowFromTrace = true;
         throw self::exception($exceptionClass, $message, $code, $previous, $arguments);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function enableEventStream(): void
-    {
-        self::$eventStreamEnabled = true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function disableEventStream(): void
-    {
-        self::$eventStreamEnabled = false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function isEventStreamEnabled(): bool
-    {
-        return self::$eventStreamEnabled;
     }
 }
