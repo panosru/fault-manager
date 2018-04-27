@@ -37,5 +37,26 @@
     "psr-4": {
       "Omega\\FaultManagerTests\\": "tests/unit/"
     }
+  },
+  "scripts": {
+    "post-update-cmd": "@compiled-clear-all",
+    "test": [
+      "@compiled-clear-tests",
+      "phpunit --no-coverage"
+    ],
+    "test-coverage": [
+      "@compiled-clear-tests",
+      "phpunit"
+    ],
+    "compiled-clear": "find _compiled/* ! -name '.gitkeep' | xargs rm -rf",
+    "compiled-clear-tests": "find tests/_compiled/* ! -name '.gitkeep' | xargs rm -rf",
+    "compiled-clear-all": [
+      "@compiled-clear",
+      "@compiled-clear-tests"
+    ]
+  },
+  "scripts-descriptions": {
+    "test": "Running phpunit without coverage",
+    "test-coverage": "Running phpunit with coverage"
   }
 }
