@@ -37,24 +37,5 @@
     "psr-4": {
       "Omega\\FaultManagerTests\\": "tests/unit/"
     }
-  },
-  "bin": ["bin/file-manager"],
-  "scripts": {
-    "post-update-cmd": "@compiled-clear-all",
-    "test": [
-      "@compiled-clear-tests",
-      "bin/fault-manager -t"
-    ],
-    "test-coverage": [
-      "@compiled-clear-tests",
-      "bin/fault-manager -T"
-    ],
-    "compiled-clear": "bin/fault-manager -c",
-    "compiled-clear-tests": "bin/fault-manager -C",
-    "compiled-clear-all": "bin/fault-manager -X"
-  },
-  "scripts-descriptions": {
-    "test": "Running phpunit without coverage",
-    "test-coverage": "Running phpunit with coverage"
   }
 }
