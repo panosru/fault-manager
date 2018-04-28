@@ -12,5 +12,5 @@ namespace Omega\FaultManager\Interfaces;
 
 interface FaultManagerEventHandler
 {
-
+    public function __invoke(\Throwable $exception);
 }

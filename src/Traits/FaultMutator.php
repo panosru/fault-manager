@@ -49,7 +49,10 @@ trait FaultMutator
         \array_shift($stackTrace);
         // Remove 'Fault::throw()' from trace if present
         if (0 === \strcmp('exception', $stackTrace[0]['function']) &&
-            0 === \strcmp('throw', $stackTrace[1]['function'])
+            (
+                isset($stackTrace[1]) &&
+                0 === \strcmp('throw', $stackTrace[1]['function'])
+            )
         ) {
             \array_shift($stackTrace);
         }

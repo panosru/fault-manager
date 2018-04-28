@@ -112,14 +112,167 @@ class FaultTest extends TestCase
      * @covers ::enableEventStream()
      * @covers ::disableEventStream()
      * @covers ::isEventStreamEnabled()
+     * @covers ::eventStreamHandler()
      */
     public function enableAndDisableEventStream(): void
     {
         Fault::enableEventStream();
         self::assertTrue(Fault::isEventStreamEnabled());
+        self::assertTrue(\Hoa\Event\Event::getEvent('hoa://Event/Exception')->isListened());
 
         Fault::disableEventStream();
         self::assertFalse(Fault::isEventStreamEnabled());
+        self::assertFalse(\Hoa\Event\Event::getEvent('hoa://Event/Exception')->isListened());
+    }
+
+    /**
+     * @test
+     * @covers ::registerHandler()
+     * @covers ::unregisterHandler()
+     */
+    public function registerAndUnregisterEventHandler(): void
+    {
+        $eventId = 'TestEventId';
+        $handlerMock = \Mockery::mock(\Omega\FaultManager\Interfaces\FaultManagerEventHandler::class);
+
+        $reflection = new \ReflectionClass(Fault::class);
+
+        $handlers = $reflection->getProperty('handlers');
+        $handlers->setAccessible(true);
+
+        self::assertCount(0, $handlers->getValue($reflection));
+        Fault::registerHandler($eventId, $handlerMock);
+        self::assertCount(1, $handlers->getValue($reflection));
+        Fault::unregisterHandler($eventId);
+        self::assertCount(0, $handlers->getValue($reflection));
+    }
+
+    /**
+     * @test
+     * @covers ::registerHandler()
+     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerExistsException
+     */
+    public function registerExistingEventHandlerWithoutOverride(): void
+    {
+        $eventId = 'TestEventId';
+        $handlerMock = \Mockery::mock(\Omega\FaultManager\Interfaces\FaultManagerEventHandler::class);
+
+        Fault::registerHandler($eventId, $handlerMock);
+        Fault::registerHandler($eventId, $handlerMock);
+    }
+
+    /**
+     * @test
+     * @covers ::registerHandler()
+     */
+    public function registerExistingEventHandlerWithOverride(): void
+    {
+        $eventId = 'TestEventId';
+        $handlerMock = \Mockery::mock(\Omega\FaultManager\Interfaces\FaultManagerEventHandler::class);
+
+        $reflection = new \ReflectionClass(Fault::class);
+
+        $handlers = $reflection->getProperty('handlers');
+        $handlers->setAccessible(true);
+
+        self::assertCount(0, $handlers->getValue($reflection));
+        Fault::registerHandler($eventId, $handlerMock);
+        self::assertCount(1, $handlers->getValue($reflection));
+        Fault::registerHandler($eventId, $handlerMock, true);
+        self::assertCount(1, $handlers->getValue($reflection));
+    }
+
+    /**
+     * @test
+     * @covers ::registerHandler()
+     * @covers ::exception()
+     * @covers ::eventStreamHandler()
+     */
+    public function registerEventHandler(): void
+    {
+        Fault::enableEventStream();
+
+        $handlerMock = \Mockery::spy(\Omega\FaultManager\Interfaces\FaultManagerEventHandler::class)
+            ->shouldReceive('__invoke')
+            ->times(4)
+            ->getMock();
+
+        Fault::registerHandler(\Exception::class, $handlerMock);
+        Fault::registerHandler(self::TESTING_CUSTOM_EVENT_EXCEPTION, $handlerMock);
+        Fault::registerHandler(Fault::ALL_EVENTS, $handlerMock);
+        Fault::exception(\Exception::class);
+        Fault::exception(self::TESTING_CUSTOM_EVENT_EXCEPTION);
+    }
+
+    /**
+     * @test
+     * @covers ::registerEvent()
+     * @covers ::exception()
+     * @expectedException \Exception
+     */
+    public function routeToEventStreamNonEventException(): void
+    {
+        Fault::enableEventStream();
+
+        $exceptionMessage = 'bad message passed to event from non event exception!';
+
+        $spy = \Mockery::spy('MySpy')
+            ->shouldReceive('getExceptionData')
+            ->once()
+            ->with($exceptionMessage)
+            ->getMock();
+
+        \Hoa\Event\Event::getEvent('hoa://Event/Exception')
+            ->attach(function (\Hoa\Event\Bucket $bucket) use ($spy, $exceptionMessage) {
+                /** @var \Hoa\Exception\Exception $exception */
+                $exception = $bucket->getData();
+                if (0 === \strcmp($exceptionMessage, $exception->getMessage())) {
+                    $spy->getExceptionData($exception->getMessage());
+                }
+            });
+
+        Fault::throw(
+            \Exception::class,
+            'bad message passed to %s from %s exception!',
+            0,
+            null,
+            ['event', 'non event']
+        );
+    }
+
+    /**
+     * @test
+     * @coversNothing
+     * @expectedException \MyCustomTestingEventException
+     */
+    public function checkIfCustomEventPassedToEventStream(): void
+    {
+        Fault::enableEventStream();
+
+        $exceptionMessage = 'bad message passed to event.';
+
+        $spy = \Mockery::spy('MySpy')
+            ->shouldReceive('getExceptionData')
+            ->once()
+            ->with($exceptionMessage)
+            ->getMock();
+
+        \Hoa\Event\Event::getEvent('hoa://Event/Exception')
+            ->attach(function (\Hoa\Event\Bucket $bucket) use ($spy, $exceptionMessage) {
+                /** @var \Hoa\Exception\Exception $exception */
+                $exception = $bucket->getData();
+                if (0 === \strcmp($exceptionMessage, $exception->getMessage())) {
+                    $spy->getExceptionData($exception->getMessage());
+                }
+            });
+
+        Fault::throw(
+            self::TESTING_CUSTOM_EVENT_EXCEPTION,
+            'bad message passed to %s.',
+            0,
+            null,
+            ['event']
+        );
     }
 
     /**
@@ -317,77 +470,6 @@ class FaultTest extends TestCase
     }
 
     /**
-     * @test
-     * @coversNothing
-     * @expectedException \MyCustomTestingEventException
-     */
-    public function checkIfCustomEventPassedToEventStream(): void
-    {
-        Fault::enableEventStream();
-
-        $exceptionMessage = 'bad message passed to event.';
-        
-        $spy = \Mockery::spy('MySpy')
-            ->shouldReceive('getExceptionData')
-            ->once()
-            ->with($exceptionMessage)
-            ->getMock();
-
-        \Hoa\Event\Event::getEvent('hoa://Event/Exception')
-            ->attach(function (\Hoa\Event\Bucket $bucket) use ($spy, $exceptionMessage) {
-            /** @var \Hoa\Exception\Exception $exception */
-            $exception = $bucket->getData();
-            if (0 === \strcmp($exceptionMessage, $exception->getMessage())) {
-                $spy->getExceptionData($exception->getMessage());
-            }
-        });
-        
-        Fault::throw(
-            self::TESTING_CUSTOM_EVENT_EXCEPTION,
-            'bad message passed to %s.',
-            0,
-            null,
-            ['event']
-        );
-    }
-
-    /**
-     * @test
-     * @covers ::registerEvent()
-     * @covers ::exception()
-     * @expectedException \Exception
-     */
-    public function routeToEventStreamNonEventException(): void
-    {
-        Fault::enableEventStream();
-
-        $exceptionMessage = 'bad message passed to event from non event exception!';
-
-        $spy = \Mockery::spy('MySpy')
-            ->shouldReceive('getExceptionData')
-            ->once()
-            ->with($exceptionMessage)
-            ->getMock();
-
-        \Hoa\Event\Event::getEvent('hoa://Event/Exception')
-            ->attach(function (\Hoa\Event\Bucket $bucket) use ($spy, $exceptionMessage) {
-                /** @var \Hoa\Exception\Exception $exception */
-                $exception = $bucket->getData();
-                if (0 === \strcmp($exceptionMessage, $exception->getMessage())) {
-                    $spy->getExceptionData($exception->getMessage());
-                }
-            });
-
-        Fault::throw(
-            \Exception::class,
-            'bad message passed to %s from %s exception!',
-            0,
-            null,
-            ['event', 'non event']
-        );
-    }
-
-    /**
      * @before
      * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
      * @throws \ReflectionException
@@ -395,10 +477,6 @@ class FaultTest extends TestCase
     protected function disableFaultEventStreamIfEnabled(): void
     {
         Fault::setCompilePath(dirname(__DIR__) . '/_compiled/');
-
-        if (Fault::isEventStreamEnabled()) {
-            Fault::disableEventStream();
-        }
 
         if (null === $this->fileSystem) {
             $reflector = new \ReflectionClass(Fault::class);
@@ -423,9 +501,22 @@ class FaultTest extends TestCase
     /**
      * @after
      * @throws \League\Flysystem\FileNotFoundException
+     * @throws \ReflectionException
      */
     protected function checkIfTestingExceptionAlreadyExistsAndDeleteIt(): void
     {
+        Fault::disableEventStream();
+
+        // Clean any event handlers if exist
+        $reflection = new \ReflectionClass(Fault::class);
+        $handlers = $reflection->getProperty('handlers');
+        $handlers->setAccessible(true);
+        $handlers = $handlers->getValue($reflection);
+
+        foreach ($handlers as $eventId => $handler) {
+            Fault::unregisterHandler($eventId);
+        }
+
         // loop through testing exception files
         foreach ($this->testingFiles as $file) {
             // Check if file exists

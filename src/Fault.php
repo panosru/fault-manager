@@ -21,7 +21,6 @@ use Omega\FaultManager\Traits\FaultMutator as TFaultMutator;
  */
 class Fault implements IFaultManager
 {
-
     use TFaultGenerator;
     use TFaultEventStream;
     use TFaultMutator;
@@ -75,7 +74,7 @@ class Fault implements IFaultManager
 
             if (self::isEventStreamEnabled()) {
                 // Since EventStream is enabled then we extend from FaultManagerException Abstract
-                $extendFromClass = Abstracts\FaultManagerException::class;
+                $extendFromClass = Abstracts\FaultManagerException::class; // @codeCoverageIgnore
             }
 
             // Persist generated exceptionClass into file under compiled directory

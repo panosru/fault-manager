@@ -12,6 +12,9 @@ namespace Omega\FaultManager\Interfaces;
 
 interface FaultManager
 {
+    /** @var string */
+    public const ALL_EVENTS = '*';
+
     /**
      * @param string $exceptionClass
      * @param string $message
@@ -59,6 +62,18 @@ interface FaultManager
         int $code = 0,
         ?\Throwable $previous = null,
         array $arguments = []
+    ): void;
+
+    /**
+     * @param string $eventId
+     * @param FaultManagerEventHandler $handler
+     * @param bool $override
+     * @throws \Omega\FaultManager\Exceptions\EventHandlerExistsException
+     */
+    public static function registerHandler(
+        string $eventId,
+        FaultManagerEventHandler $handler,
+        bool $override = false
     ): void;
 
     /**
