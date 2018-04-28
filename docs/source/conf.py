@@ -8,37 +8,89 @@
 
 # -- Path setup --------------------------------------------------------------
 
+# All configuration values have a default; values that are commented out
+# serve to show the default.
+import re
+import sys
+import os
+import shlex
+import datetime
+import dateutil.parser
+import recommonmark
+from recommonmark.transform import AutoStructify
+from recommonmark.parser import CommonMarkParser
+
+# loading PhpLexer
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+from subprocess import Popen, PIPE
+
+def get_version():
+    if os.environ.get('READTHEDOCS') == 'True':
+        return os.environ.get('READTHEDOCS_VERSION')
+
+    pipe = Popen("git tag -l | awk 'END{print}'", stdout=PIPE, shell=True)
+    version = pipe.stdout.read()
+
+    if version:
+        return version
+    else:
+        return 'unknown'
+
+def get_last_branch_update( branch ):
+    command = "git show --format='%s' origin/%s | head -n 1"
+    pipe = Popen(command % ('%ci', branch), stdout=PIPE, shell=True)
+    last_update = pipe.stdout.read()
+
+    pipe = Popen(command % ('%cr', branch), stdout=PIPE, shell=True)
+    update_ago = pipe.stdout.read()
+
+    if last_update:
+        last_update = dateutil.parser.parse(last_update)
+        return "%s *( %s )*" % (last_update.strftime('%B %d, %Y'), update_ago)
+    else:
+        return 'unknown'
+
+highlight_language = 'php'
+
+# enable highlighting for PHP code not between ``<?php ... ?>`` by default
+lexers['php'] = PhpLexer(startinline=True)
+lexers['php-annotations'] = PhpLexer(startinline=True)
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
-#
-import os
-import sys
-sys.path.insert(0, os.path.abspath('.'))
-
-from recommonmark.parser import CommonMarkParser
+# sys.path.insert(0, os.path.abspath('../../src'))
 
 source_parsers = {
-    '.md': CommonMarkParser,
+    '.md': 'recommonmark.parser.CommonMarkParser',
 }
+
+rst_epilog = "\n.. |last_master_update| replace:: %s" % get_last_branch_update("master")
+rst_epilog = rst_epilog + "\n.. |last_develop_update| replace:: %s" % get_last_branch_update("develop")
+
 
 # -- Project information -----------------------------------------------------
 
 project = u'Fault Manager'
 copyright = u'2018, Omega Business Development Limited | MIT License'
 author = u'Panagiotis Kosmidis (@panosru)'
+epub_author = u'Panagiotis Kosmidis (@panosru)'
 
-# The short X.Y version
-version = u''
-# The full version, including alpha/beta/rc tags
-release = u'1.3.0'
-
+# The version info for the project you're documenting, acts as replacement for
+# |version| and |release|, also used in various other places throughout the
+# built documents.
+#
+# The short X.Y version.
+version = get_version().strip()
+# The full version, including alpha/beta/rc tags.
+release = get_version()
 
 # -- General configuration ---------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-needs_sphinx = '1.0'
+needs_sphinx = '1.3'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -46,6 +98,9 @@ needs_sphinx = '1.0'
 extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.githubpages',
+    'sphinx.ext.ifconfig',
+    'sphinx.ext.viewcode',
+    'sphinxcontrib.phpdomain',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -54,7 +109,6 @@ templates_path = ['_templates']
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
 #
-# source_suffix = ['.rst', '.md']
 source_suffix = ['.rst', '.md']
 
 # The master toctree document.
@@ -65,29 +119,58 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-# language = None
+language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path .
-exclude_patterns = []
+exclude_patterns = ['_build', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+pygments_style = 'native'
 
 
 # -- Options for HTML output -------------------------------------------------
 
+#on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+if not on_rtd:  # only import and set the theme if we're building docs locally
+    import sphinx_rtd_theme
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+    print sphinx_rtd_theme.get_html_theme_path()
+
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "omegad-biz", # Username
+    "github_repo": "fault-manager", # Repo name
+    "github_version": "develop", # Version
+    "conf_py_path": "/docs/source/", # Path in the checkout to the docs root
+}
+
+# Add any paths that contain custom themes here, relative to this directory.
+#html_theme_path = ['_templates']
+
+html_add_permalinks = ""
+
+# The name for this set of Sphinx documents.  If None, it defaults to
+# "<project> v<release> documentation".
+html_title = "Fault Manager %s Manual" % get_version()
+
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'default'
+html_theme = 'sphinx_rtd_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-# html_theme_options = {}
+html_theme_options = {
+    'navigation_depth': 5,
+    'collapse_navigation': True,
+    'display_version': True,
+}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -103,6 +186,12 @@ html_static_path = ['_static']
 # 'searchbox.html']``.
 #
 # html_sidebars = {}
+
+# If true, "Created using Sphinx" is shown in the HTML footer. Default is True.
+html_show_sphinx = False
+
+# If true, `todo` and `todoList` produce output, else they produce nothing.
+todo_include_todos = True
 
 
 # -- Options for HTMLHelp output ---------------------------------------------
@@ -161,29 +250,32 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
+# Documents to append as an appendix to all manuals.
+#texinfo_appendices = []
+
+# If false, no module index is generated.
+#texinfo_domain_indices = True
+
+# How to display URL addresses: 'footnote', 'no', or 'inline'.
+#texinfo_show_urls = 'footnote'
+
+# If true, do not generate a @detailmenu in the "Top" node's menu.
+#texinfo_no_detailmenu = False
+
+numfig = True
+
+numfig_format = {
+    'code-block': 'Example %s',
+    'figure': 'Figure %s',
+    'table': 'Table %s',
+    'section': 'Section'
+}
 
 # -- Extension configuration -------------------------------------------------
-#on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
-on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
-
-if not on_rtd:  # only import and set the theme if we're building docs locally
-    import sphinx_rtd_theme
-    html_theme = 'sphinx_rtd_theme'
-    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-    print sphinx_rtd_theme.get_html_theme_path()
-
-# load PhpLexer
-from sphinx.highlighting import lexers
-from pygments.lexers.web import PhpLexer
-
-# enable highlighting for PHP code not between <?php ... ?> by default
-lexers['php'] = PhpLexer(startinline=True)
-lexers['php-annotations'] = PhpLexer(startinline=True)
-
-html_context = {
-    "display_github": True, # Integrate GitHub
-    "github_user": "omegad-biz", # Username
-    "github_repo": "fault-manager", # Repo name
-    "github_version": "develop", # Version
-    "conf_py_path": "/docs/source/", # Path in the checkout to the docs root
-}
+github_doc_root = 'https://github.com/rtfd/recommonmark/tree/master/doc/'
+def setup(app):
+    app.add_config_value('recommonmark_config', {
+            'url_resolver': lambda url: github_doc_root + url,
+            'auto_toc_tree_section': 'Contents',
+            }, True)
+    app.add_transform(AutoStructify)

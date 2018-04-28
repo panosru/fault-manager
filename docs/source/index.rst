@@ -1,19 +1,28 @@
-.. Fault Manager documentation master file, created by
-   sphinx-quickstart on Sat Apr 28 19:58:22 2018.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Fault Manager Manual
+====================
 
-Welcome to Fault Manager's documentation!
-=========================================
+Latest stable version: |version|. Updated on |last_master_update|
+
+Latest update on develop branch: |last_develop_update|
+
+Author: Panagiotis Kosmidis (`@panosru <http://github.com/panosru>`_)
+
+Contents:
+
+.. user-docs:
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 2
+    :caption: User Documentation
 
+    getting-started
+    features
+    faq
 
-Indices and tables
-==================
+.. api-docs:
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree::
+    :maxdepth: 3
+    :caption: API Documentation
+
+    api/Omega/FaultManager/index

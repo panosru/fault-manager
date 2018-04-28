@@ -1,0 +1,9 @@
+# Don't build any extra formats
+formats:
+    - none
+
+python:
+    extra_requirements:
+        - sphinxcontrib-phpdomain
+        - recommonmark
+        - Pygments
