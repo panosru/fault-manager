@@ -6,11 +6,12 @@ A convinient way for exception handling and generating on the fly non-existing e
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
 [![StyleCI][styleci-badge]][styleci]
-[![downloads][downloads-badge]][downloads]
+[![Documentation Status](https://readthedocs.org/projects/fault-manager/badge/?version=latest)](http://fault-manager.readthedocs.io/en/latest/?badge=latest)
 [![MIT License][license-badge]][license]
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](CONTRIBUTORS.md)
 [![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
+[![downloads][downloads-badge]][downloads]
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]

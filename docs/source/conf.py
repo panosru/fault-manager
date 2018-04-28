@@ -179,3 +179,11 @@ from pygments.lexers.web import PhpLexer
 # enable highlighting for PHP code not between <?php ... ?> by default
 lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
+
+html_context = {
+    "display_github": True, # Integrate GitHub
+    "github_user": "omegad-biz", # Username
+    "github_repo": "fault-manager", # Repo name
+    "github_version": "develop", # Version
+    "conf_py_path": "/docs/source/", # Path in the checkout to the docs root
+}
