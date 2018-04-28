@@ -35,7 +35,6 @@ trait FaultGenerator
 
         if (!(\file_exists($path) && \is_dir($path) && \is_writable($path))) {
             throw new \Omega\FaultManager\Exceptions\InvalidCompilePathException($path);
-
         }
 
         self::$compiledPath = $path;
