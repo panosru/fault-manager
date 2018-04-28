@@ -1,0 +1,20 @@
+site_name: Fault Manager
+site_description: A convinient way for exception handling and generating on the fly non-existing exceptions.
+site_author: Panagiotis Kosmidis (@panosru)
+copyright: MIT License | Copyright (c) 2018 Omega Business Development Limited
+repo_url: https://github.com/omegad-biz/fault-manager
+repo_name: 'GitHub'
+theme: readthedocs
+
+pages:
+  - 'Getting Started':
+    - 'Overview and Features': features.md
+    - 'Installing': installing.md
+    - 'Quick Start': quick-start.md
+  - 'Features':
+    - 'Configuration': config.md
+    - 'Working with Exceptions': exceptions.md
+    - 'Generating Custom Exceptions': custom-exceptions.md
+    - 'Working with EventStream': event-stream.md
+  - 'FAQ': faq.md
+  - 'API': api.md
