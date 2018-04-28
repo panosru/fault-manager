@@ -16,5 +16,4 @@ namespace Omega\FaultManager\Plugins;
  */
 class RouteExceptions implements \Hoa\Event\Source
 {
-
 }
