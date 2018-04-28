@@ -12,9 +12,9 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('.'))
 
 from recommonmark.parser import CommonMarkParser
 
@@ -25,7 +25,7 @@ source_parsers = {
 # -- Project information -----------------------------------------------------
 
 project = u'Fault Manager'
-copyright = u'2018, Panagiotis Kosmidis (@panosru)'
+copyright = u'2018, Omega Business Development Limited | MIT License'
 author = u'Panagiotis Kosmidis (@panosru)'
 
 # The short X.Y version
@@ -38,12 +38,13 @@ release = u'1.3.0'
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-# needs_sphinx = '1.0'
+needs_sphinx = '1.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.todo',
     'sphinx.ext.githubpages',
 ]
 
@@ -64,7 +65,7 @@ master_doc = 'index'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+# language = None
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -80,7 +81,7 @@ pygments_style = 'sphinx'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'alabaster'
+html_theme = 'default'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -162,3 +163,19 @@ texinfo_documents = [
 
 
 # -- Extension configuration -------------------------------------------------
+#on_rtd is whether we are on readthedocs.org, this line of code grabbed from docs.readthedocs.org
+on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
+
+if not on_rtd:  # only import and set the theme if we're building docs locally
+    import sphinx_rtd_theme
+    html_theme = 'sphinx_rtd_theme'
+    html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+    print sphinx_rtd_theme.get_html_theme_path()
+
+# load PhpLexer
+from sphinx.highlighting import lexers
+from pygments.lexers.web import PhpLexer
+
+# enable highlighting for PHP code not between <?php ... ?> by default
+lexers['php'] = PhpLexer(startinline=True)
+lexers['php-annotations'] = PhpLexer(startinline=True)

@@ -11,7 +11,6 @@ Welcome to Fault Manager's documentation!
    :caption: Contents:
 
 
-
 Indices and tables
 ==================
 
