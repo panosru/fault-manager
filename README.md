@@ -2,9 +2,11 @@
 
 A convinient way for exception handling and generating on the fly non-existing exceptions.
 
+[![version][version-badge]][package]
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
-[![version][version-badge]][package] [![downloads][downloads-badge]][downloads]
+[![StyleCI][styleci-badge]][styleci]
+[![downloads][downloads-badge]][downloads]
 [![MIT License][license-badge]][license]
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](CONTRIBUTORS.md)
@@ -54,6 +56,8 @@ See also the list of [contributors](CONTRIBUTORS.md) who participated in this pr
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
+[styleci-badge]: https://styleci.io/repos/130613874/shield?branch=master
+[styleci]: https://styleci.io/repos/130613874
 [build-badge]: https://secure.travis-ci.org/omegad-biz/fault-manager.svg?branch=master
 [build]: https://secure.travis-ci.org/omegad-biz/fault-manager
 [coverage-badge]: https://coveralls.io/repos/github/omegad-biz/fault-manager/badge.svg?branch=master
