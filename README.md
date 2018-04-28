@@ -21,7 +21,7 @@ A convinient way for exception handling and generating on the fly non-existing e
 composer require omegad-biz/fault-manager
 ```
 
-*Usage examples & documentation coming soon.*
+[~ Read the docs](https://omegad-biz.github.io/fault-manager/)
 
 ## Contributing & Code of Conduct
 
