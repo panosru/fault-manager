@@ -7,3 +7,4 @@ python:
         - sphinxcontrib-phpdomain
         - recommonmark
         - Pygments
+        - python-dateutil
