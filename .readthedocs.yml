@@ -2,9 +2,4 @@
 formats:
     - none
 
-python:
-    extra_requirements:
-        - sphinxcontrib-phpdomain
-        - recommonmark
-        - Pygments
-        - python-dateutil
+requirements_file: docs/requirements.txt
