@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -95,11 +95,11 @@ Methods
 	
 		
 		:Parameters:
-			* **$router** (:any:`Hoa\\Event\\Source <Hoa\\Event\\Source>`)  
-			* **$exception** (:any:`Throwable <Throwable>`)  
+			* **$router** (Hoa\\Event\\Source <Hoa\\Event\\Source>)
+			* **$exception** (Throwable <Throwable>)
 
 		
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
 	
 	
 

@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -59,7 +59,7 @@ Methods
 		:Parameters:
 			* **$message** (null | string)  
 			* **$code** (int | null)  
-			* **$previous** (null | :any:`\\Throwable <Throwable>`)  
+			* **$previous** (null | \\Throwable <Throwable>)
 			* **$arguments** (array | null)  
 
 		

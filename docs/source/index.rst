@@ -1,3 +1,7 @@
+.. rst-class:: FaultManagerdoc
+
+.. _docs-index:
+
 Fault Manager Manual
 ====================
 
@@ -9,20 +13,20 @@ Author: Panagiotis Kosmidis (`@panosru <http://github.com/panosru>`_)
 
 Contents:
 
-.. user-docs:
+.. _user-docs:
 
 .. toctree::
     :maxdepth: 2
     :caption: User Documentation
 
     getting-started
-    features
+    reference
     faq
 
-.. api-docs:
+.. _api-docs:
 
 .. toctree::
-    :maxdepth: 3
+    :maxdepth: 5
     :caption: API Documentation
 
     api/Omega/FaultManager/index

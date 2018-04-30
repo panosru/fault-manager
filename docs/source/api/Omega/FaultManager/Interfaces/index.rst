@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -16,7 +16,7 @@ Interfaces
 ----------
 
 .. toctree::
-	:maxdepth: 5
+	:maxdepth: 8
 	
 	FaultManagerException <FaultManagerException>
 	FaultManager <FaultManager>

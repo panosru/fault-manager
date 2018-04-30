@@ -6,6 +6,7 @@ A convinient way for exception handling and generating on the fly non-existing e
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
 [![StyleCI][styleci-badge]][styleci]
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/omegad-biz/fault-manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/omegad-biz/fault-manager/?branch=master)
 [![Documentation Status](https://readthedocs.org/projects/fault-manager/badge/?version=latest)](http://fault-manager.readthedocs.io/en/latest/?badge=latest)
 [![MIT License][license-badge]][license]
 
@@ -18,11 +19,11 @@ A convinient way for exception handling and generating on the fly non-existing e
 
 ## Installing
 
-```
+```bash
 composer require omegad-biz/fault-manager
 ```
 
-[~ Read the docs](http://fault-manager.readthedocs.io/en/latest/)
+[~ Read the docs](http://fault-manager.readthedocs.io/) to get started.
 
 ## Contributing & Code of Conduct
 

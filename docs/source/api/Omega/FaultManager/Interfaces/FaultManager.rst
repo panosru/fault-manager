@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -34,92 +34,92 @@ Methods
 			* **$exceptionClass** (string)  
 			* **$message** (string)  
 			* **$code** (int)  
-			* **$previous** (null | :any:`\\Throwable <Throwable>`)  
+			* **$previous** (null | \\Throwable <Throwable>)
 			* **$arguments** (array)  
 
 		
-		:Returns: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
+		:Returns: \\Throwable <Throwable>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
 	
 	
 
@@ -132,91 +132,91 @@ Methods
 			* **$exceptionClass** (string)  
 			* **$message** (string)  
 			* **$code** (int)  
-			* **$previous** (null | :any:`\\Throwable <Throwable>`)  
+			* **$previous** (null | \\Throwable <Throwable>)
 			* **$arguments** (array)  
 
 		
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
-		:Throws: :any:`\\Throwable <Throwable>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>` 
-		:Throws: :any:`\\Hoa\\Event\\Exception <Hoa\\Event\\Exception>` 
-		:Throws: :any:`\\ReflectionException <ReflectionException>` 
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
+		:Throws: \\Throwable <Throwable>
+		:Throws: \\Omega\\FaultManager\\Abstracts\\FaultManagerException <Omega\\FaultManager\\Abstracts\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\FaultManagerException <Omega\\FaultManager\\Exceptions\\FaultManagerException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EmptyErrorNameException <Omega\\FaultManager\\Exceptions\\EmptyErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException <Omega\\FaultManager\\Exceptions\\IncompatibleErrorNameException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
+		:Throws: \\Omega\\FaultManager\\Exceptions\\NamespacedErrorException <Omega\\FaultManager\\Exceptions\\NamespacedErrorException>
+		:Throws: \\Hoa\\Event\\Exception <Hoa\\Event\\Exception>
+		:Throws: \\ReflectionException <ReflectionException>
 	
 	
 
@@ -227,11 +227,11 @@ Methods
 		
 		:Parameters:
 			* **$eventId** (string)  
-			* **$handler** (:any:`Omega\\FaultManager\\Interfaces\\FaultManagerEventHandler <Omega\\FaultManager\\Interfaces\\FaultManagerEventHandler>`)  
+			* **$handler** (Omega\\FaultManager\\Interfaces\\FaultManagerEventHandler <Omega\\FaultManager\\Interfaces\\FaultManagerEventHandler>)
 			* **$override** (bool)  
 
 		
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\EventHandlerExistsException <Omega\\FaultManager\\Exceptions\\EventHandlerExistsException>` 
+		:Throws: \\Omega\\FaultManager\\Exceptions\\EventHandlerExistsException <Omega\\FaultManager\\Exceptions\\EventHandlerExistsException>
 	
 	
 
@@ -289,7 +289,7 @@ Methods
 			* **$path** (string)  
 
 		
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
 	
 	
 
@@ -317,7 +317,7 @@ Methods
 			
 		
 		
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
 	
 	
 

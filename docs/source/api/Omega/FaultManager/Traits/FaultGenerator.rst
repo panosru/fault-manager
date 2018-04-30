@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -34,7 +34,7 @@ Methods
 			* **$path** (string)  
 
 		
-		:Throws: :any:`\\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>` 
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
 	
 	
 

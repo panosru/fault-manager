@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -28,7 +28,7 @@ Methods
 	
 		
 		:Parameters:
-			* **$exception** (:any:`Throwable <Throwable>`)  
+			* **$exception** (Throwable <Throwable>)
 
 		
 	

@@ -1,19 +1,13 @@
+.. rst-class:: FaultManagerdoc
+
+.. _getting-started-overview:
+
 Overview and Features
 =====================
 
-.. note:: You can use ``sphinx-autobuild`` to auto-reload your docs. Run ``sphinx-autobuild . _build/html`` instead.
+With Fault Manager, you can easily throw or create already defined exceptions, either your own either PHP build in
+exceptions.
 
-You can modify a **DateTime's date** using :php:meth:`setFilesystem`.
-
-.. sidebar:: Info in a sidebar
-
-    This is a small box :version:``
-
-.. literalinclude:: ../../src/Abstracts/FaultManagerException.php
-    :language: php
-    :caption: /Abstracts/FaultManagerException.php
-    :name: FaultManagerException.php
-    :emphasize-lines: 11-14
-    :lines: 29-48
-    :lineno-start: 29
-    :linenos:
+Besides that, you are able to generate on-the-fly exceptions that do not exist yet, Fault Manager will
+generate them for you thus they won't need to be generated next time you call them and also if you use an IDE, you'll
+have code-hint support for custom generated exceptions as well.

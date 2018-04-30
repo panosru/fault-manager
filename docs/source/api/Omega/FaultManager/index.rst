@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -16,7 +16,7 @@ Namespaces
 ----------
 
 .. toctree::
-	:maxdepth: 5
+	:maxdepth: 2
 	
 	Abstracts <Abstracts/index>
 	Exceptions <Exceptions/index>
@@ -29,7 +29,7 @@ Classes
 -------
 
 .. toctree::
-	:maxdepth: 5
+	:maxdepth: 1
 	
 	Fault <Fault>
 

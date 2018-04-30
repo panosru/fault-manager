@@ -90,7 +90,7 @@ release = get_version()
 
 # If your documentation needs a minimal Sphinx version, state it here.
 #
-needs_sphinx = '1.8'
+needs_sphinx = '1.6.5'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
@@ -101,7 +101,15 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sphinx.ext.viewcode',
     'sphinxcontrib.phpdomain',
+    'sphinx.ext.autosectionlabel',
+    'sphinxcontrib.inlinesyntaxhighlight',
 ]
+
+# use language set by highlight directive if no language is set by role
+inline_highlight_respect_highlight = False
+
+# use language set by highlight directive if no role is set
+inline_highlight_literals = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -127,7 +135,7 @@ language = None
 exclude_patterns = ['_build', '.DS_Store']
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'native'
+pygments_style = 'monokai'
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -279,3 +287,6 @@ def setup(app):
             'auto_toc_tree_section': 'Contents',
             }, True)
     app.add_transform(AutoStructify)
+
+    app.add_stylesheet('css/custom.css')
+    app.add_stylesheet('css/dracula.css')

@@ -1,4 +1,4 @@
-.. rst-class:: phpdoctorst
+.. rst-class:: FaultManagerdoc
 
 .. role:: php(code)
 	:language: php
@@ -35,7 +35,7 @@ Properties
 
 .. php:attr:: protected static filesystem
 
-	:Type: :any:`\\League\\Flysystem\\FilesystemInterface <League\\Flysystem\\FilesystemInterface>` 
+	:Type: \\League\\Flysystem\\FilesystemInterface <League\\Flysystem\\FilesystemInterface>
 
 
 Methods
@@ -47,7 +47,7 @@ Methods
 	
 		
 		:Parameters:
-			* **$filesystem** (:any:`League\\Flysystem\\FilesystemInterface <League\\Flysystem\\FilesystemInterface>`)  
+			* **$filesystem** (League\\Flysystem\\FilesystemInterface <League\\Flysystem\\FilesystemInterface>)
 
 		
 	
@@ -72,7 +72,7 @@ Methods
 			* **$whitelist** (bool)  
 
 		
-		:Returns: :any:`\\Generator <Generator>` 
+		:Returns: \\Generator <Generator>
 	
 	
 
