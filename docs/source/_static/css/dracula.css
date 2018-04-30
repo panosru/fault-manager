@@ -14,6 +14,7 @@
 
 /* .highlight .hll { background-color: #f1fa8c  !important; } */
 .highlight  { background: #282a36 !important; color: #f8f8f2  !important; }
+.highlight pre { color: #f8f8f2 !important; }
 .highlight .c { color: #6272a4  !important; } /* Comment */
 .highlight .err { color: #f8f8f2  !important; } /* Error */
 .highlight .g { color: #f8f8f2  !important; } /* Generic */
