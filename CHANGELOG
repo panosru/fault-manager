@@ -3,6 +3,7 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.3 - Added event handling support
+      30/04/2018 19:51  1.3.1  Bug fixes & docs
       28/04/2018 03:53  1.3.0  initial release
 
    Version 1.2 - Generated exceptions are now compiled
