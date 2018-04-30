@@ -23,5 +23,5 @@ class NamespacedErrorException extends AFaultManagerException
     protected $code = 66005;
 
     /** @var string */
-    protected $message = 'Namespaces custom exceptions are not supported (yet).';
+    protected $message = 'Namespaces in custom exceptions are not supported (yet).';
 }

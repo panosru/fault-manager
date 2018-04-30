@@ -24,7 +24,7 @@ class NamespacedErrorExceptionTest extends TestCase
      * @covers ::getMessage()
      * @covers ::getCode()
      * @expectedException \Omega\FaultManager\Exceptions\NamespacedErrorException
-     * @expectedExceptionMessage Namespaces custom exceptions are not supported (yet).
+     * @expectedExceptionMessage Namespaces in custom exceptions are not supported (yet).
      * @expectedExceptionCode 66005
      */
     public function isThrowable(): void

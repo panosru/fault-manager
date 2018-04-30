@@ -97,6 +97,19 @@ class FaultTest extends TestCase
 
     /**
      * @test
+     * @covers ::exception()
+     * @coversDefaultClass \Omega\FaultManager\Abstracts\FaultManagerException
+     * @expectedException \Omega\FaultManager\Exceptions\EmptyErrorNameException
+     * @expectedExceptionMessage Exception class must not be empty.
+     * @expectedExceptionCode 66002
+     */
+    public function throwsExistingNamespacedException(): void
+    {
+        throw Fault::exception(\Omega\FaultManager\Exceptions\EmptyErrorNameException::class);
+    }
+
+    /**
+     * @test
      * @coversNothing
      */
     public function eventStreamIsDisabledByDefault(): void

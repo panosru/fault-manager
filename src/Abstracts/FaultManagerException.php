@@ -39,6 +39,11 @@ abstract class FaultManagerException extends \Hoa\Exception\Exception implements
         ?\Throwable $previous = null,
         ?array $arguments = null
     ) {
+        // In case an empty message is passed, then use the one from $this->message
+        if (empty($message)) {
+            $message = null; // @codeCoverageIgnore
+        }
+
         parent::__construct(
             $message ?? $this->message,
             $code ?? $this->code,

@@ -25,8 +25,7 @@ trait FaultGenerator
     private static $filesystem;
 
     /**
-     * @param string $path
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * {@inheritdoc}
      */
     public static function setCompilePath(string $path): void
     {

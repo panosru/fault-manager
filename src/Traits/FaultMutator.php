@@ -45,26 +45,30 @@ trait FaultMutator
 
         // Get stack trace
         $stackTrace = $trace->getValue($exception);
-        // Remove first in stack because it refers to ReflectionClass::newInstanceArgs() we called previously
-        \array_shift($stackTrace);
-        // Remove 'Fault::throw()' from trace if present
-        if (0 === \strcmp('exception', $stackTrace[0]['function']) &&
-            (
-                isset($stackTrace[1]) &&
-                0 === \strcmp('throw', $stackTrace[1]['function'])
-            )
-        ) {
+        // Some times $stackTrace may be empty, especially when we call custom generated exceptions with
+        // traditional way like throw new \MyCustomGeneratedException()
+        if (0 < \count($stackTrace)) {
+            // Remove first in stack because it refers to ReflectionClass::newInstanceArgs() we called previously
             \array_shift($stackTrace);
+            // Remove 'Fault::throw()' from trace if present
+            if (0 === \strcmp('exception', $stackTrace[0]['function']) &&
+                (
+                    isset($stackTrace[1]) &&
+                    0 === \strcmp('throw', $stackTrace[1]['function'])
+                )
+            ) {
+                \array_shift($stackTrace);
+            }
+            $trace->setValue($exception, $stackTrace);
+
+            // Set "file" and "line" properties
+            $file = $reflection->getProperty('file');
+            $file->setAccessible(true);
+            $file->setValue($exception, $stackTrace[0]['file']);
+
+            $line = $reflection->getProperty('line');
+            $line->setAccessible(true);
+            $line->setValue($exception, $stackTrace[0]['line']);
         }
-        $trace->setValue($exception, $stackTrace);
-
-        // Set "file" and "line" properties
-        $file = $reflection->getProperty('file');
-        $file->setAccessible(true);
-        $file->setValue($exception, $stackTrace[0]['file']);
-
-        $line = $reflection->getProperty('line');
-        $line->setAccessible(true);
-        $line->setValue($exception, $stackTrace[0]['line']);
     }
 }

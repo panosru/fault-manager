@@ -48,11 +48,6 @@ class Fault implements IFaultManager
             throw new Exceptions\EmptyErrorNameException();
         }
 
-        // Check if is namespace
-        if (false !== \strpos($exceptionClass, '\\')) {
-            throw new Exceptions\NamespacedErrorException();
-        }
-
         $params = [&$message, $code, $previous];
 
         // Check if exceptionClass with that name already exists
@@ -63,6 +58,11 @@ class Fault implements IFaultManager
         // That is normal behaviour since we ask to autoload a class which does not exists yet.
         // On the second run when we request the class that has been generated, it will be autoload here
         if (!@\class_exists($exceptionClass)) {
+            // Check if is namespace
+            if (false !== \strpos($exceptionClass, '\\')) {
+                throw new Exceptions\NamespacedErrorException();
+            }
+
             // Check if $class has compatible exception class name
             $len = \strlen(Exceptions\FaultManagerException::EXCEPTION_CLASS_END);
             if (Exceptions\FaultManagerException::EXCEPTION_CLASS_END !== \substr($exceptionClass, -$len)) {
@@ -88,6 +88,9 @@ class Fault implements IFaultManager
         }
 
         // Get exceptionClass interfaces
+        // The reason we do not get an instance here and use instanceof is because if we get an instance here
+        // then the event will be triggered and also:
+        // PHP gets the line on which the object was instantiated [http://php.net/manual/en/throwable.getline.php]
         $interfaces = (new \ReflectionClass($exceptionClass))->getInterfaceNames();
 
         // Make sure that the requested class is \Throwable
