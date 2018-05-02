@@ -13,8 +13,8 @@ Initially, it was an internal *"feature"* of a project I'm working on, but thank
 put it in `GitHub <https://github.com/omegad-biz/fault-manager>`_, is now open-source and available to everybody.
 
 Fault Manager is under `MIT license <https://github.com/omegad-biz/fault-manager/blob/master/LICENSE>`_, feel free to
-use it and if you have any suggestions to improve is or if you want to get your hands dirty and add some functionality
-into it that you believe is currently missing, then feel free to do so! Don't forget to check the
+use it and if you have any suggestions to improve it or if you want to get your hands dirty and add some functionality
+into it, that you believe is currently missing, then feel free to do so! Don't forget to check the
 `Contributing <https://github.com/omegad-biz/fault-manager/blob/master/CONTRIBUTING.md>`_ page!
 
 

@@ -21,17 +21,21 @@ or :php:meth:`Fault::exception()` methods and get all the benefits of Fault Mana
     :name: using-fault-manager
 
     try {
-        // Using Fault::throw()
-        Fault::throw(\Exception::class, 'Bad message');
-    } catch (\Exception $exception) {
-        // Some logic after catching \Exception
-        // Let's throw one of our own now with Fault::exception()
-        throw Fault::exception(\MyException::class, 'More info');
-    } catch (\MyException $exception) {
-        // Some logic goes here...
-        // Why not throw an already defined namespaced exception?
-        // Let's do it with Fault::throw()
-        Fault::throw(\MyApp\MyException::class, 'Too many exceptions!');
+        try {
+            try {
+                // Using Fault::throw()
+                Fault::throw(\Exception::class, 'Bad message');
+            } catch (\Exception $exception) {
+                // Some logic after catching \Exception
+                // Let's throw one of our own now with Fault::exception()
+                throw Fault::exception(\MyException::class, 'More info');
+            }
+        } catch (\MyException $exception) {
+            // Some logic goes here...
+            // Why not throw an already defined namespaced exception?
+            // Let's do it with Fault::throw()
+            Fault::throw(\MyApp\MyException::class, 'Too many exceptions!');
+        }
     } catch (\MyApp\MyException::class $exception) {
         // Some more logic here...
     } finally {

@@ -42,7 +42,7 @@ In order to register a handler we use the :php:meth:`Fault::registerHandler()` m
     Fault::registerHandler(\Exception::class, MyHandler());
 
 
-If the asterisk (\*) character is used as value for :php:attr:`$eventId` parameter, then that handler will listen to
+If the asterisk (\*) character is used as a value for :php:attr:`$eventId` parameter, then that handler will listen to
 all events.
 
 .. php:class:: Fault
