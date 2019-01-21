@@ -24,6 +24,9 @@ trait FaultGenerator
     /** @var Filesystem */
     private static $filesystem;
 
+    /** @var bool */
+    private static $autoload = false;
+
     /**
      * {@inheritdoc}
      */
@@ -37,7 +40,7 @@ trait FaultGenerator
         }
 
         self::$compiledPath = $path;
-        self::$filesystem->getAdapter()->setPathPrefix($path);
+        self::getFileSystem()->getAdapter()->setPathPrefix($path);
     }
 
     /**
@@ -53,13 +56,22 @@ trait FaultGenerator
      */
     public static function autoloadCompiledExceptions(): void
     {
-        /** @var \Generator $files */
+        self::$autoload = true;
 
+        /** @var \Generator $files */
         $files = self::getFileSystem()->getCompiledExceptions();
         while ($file = $files->current()) {
             self::loadCustomException($file);
             $files->next();
         }
+    }
+
+    /**
+     * @return bool
+     */
+    public static function autoloadEnabled(): bool
+    {
+        return self::$autoload;
     }
 
     /**

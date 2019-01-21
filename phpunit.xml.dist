@@ -12,7 +12,6 @@
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
         forceCoversAnnotation="true"
-        mapTestClassNameToCoveredClassName="true"
         printerClass="PHPUnit\TextUI\ResultPrinter"
         processIsolation="false"
         stopOnError="false"
@@ -24,7 +23,6 @@
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
-        strict="true"
         verbose="true">
 
     <testsuites>
@@ -34,16 +32,13 @@
     </testsuites>
 
     <filter>
-        <blacklist>
-            <directory suffix=".php">vendor</directory>
-            <directory suffix=".php">tests</directory>
-            <directory suffix=".php">_compiled</directory>
-        </blacklist>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">src</directory>
-            <!--<exclude>
-                <directory suffix="Autoloader.php">src</directory>
-            </exclude>-->
+            <exclude>
+                <directory>vendor</directory>
+                <directory suffix=".php">tests</directory>
+                <directory suffix=".php">_compiled</directory>
+            </exclude>
         </whitelist>
     </filter>
 
@@ -51,9 +46,6 @@
         <log type="coverage-html"
              target="tests/coverage/html"
              showUncoveredFiles="true"
-             charset="UTF-8"
-             yui="true"
-             highlight="true"
              lowUpperBound="60"
              highLowerBound="95" />
         <log type="coverage-clover"

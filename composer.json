@@ -19,16 +19,15 @@
     "php": "^7.1",
     "hoa/exception": "2.17.08.30",
     "league/flysystem": "1.0.44",
+    "roave/better-reflection": "^3.2",
     "zendframework/zend-code": "^3.3"
   },
   "require-dev": {
     "mockery/mockery": "^1.0",
-    "phpunit/phpunit": "^7.1",
+    "phpunit/phpunit": "^7.5",
     "symfony/var-dumper": "^4.0"
   },
   "autoload": {
-    "classmap": ["_compiled/"],
-    "files": ["autoload.php"],
     "psr-4": {
       "Omega\\FaultManager\\": "src/"
     }

@@ -14,6 +14,7 @@ use Omega\FaultManager\Interfaces\FaultManager as IFaultManager;
 use Omega\FaultManager\Traits\FaultEventStream as TFaultEventStream;
 use Omega\FaultManager\Traits\FaultGenerator as TFaultGenerator;
 use Omega\FaultManager\Traits\FaultMutator as TFaultMutator;
+use Omega\FaultManager\Traits\FaultReflector as TFaultReflector;
 
 /**
  * Class Fault
@@ -24,6 +25,7 @@ class Fault implements IFaultManager
     use TFaultGenerator;
     use TFaultEventStream;
     use TFaultMutator;
+    use TFaultReflector;
 
     /**
      * Fault constructor.
@@ -69,29 +71,39 @@ class Fault implements IFaultManager
                 throw new Exceptions\IncompatibleErrorNameException($exceptionClass);
             }
 
-            // Default class to extend from
-            $extendFromClass = \Exception::class;
+            // Check if the class already exists
+            if (!self::getFileSystem()->has(self::makeFileName($exceptionClass))) {
+                // Default class to extend from
+                $extendFromClass = \Exception::class;
 
-            if (self::isEventStreamEnabled()) {
-                // Since EventStream is enabled then we extend from FaultManagerException Abstract
-                $extendFromClass = Abstracts\FaultManagerException::class; // @codeCoverageIgnore
+                if (self::isEventStreamEnabled()) {
+                    // Since EventStream is enabled then we extend from FaultManagerException Abstract
+                    $extendFromClass = Abstracts\FaultManagerException::class; // @codeCoverageIgnore
+                }
+
+                // Persist generated exceptionClass into file under compiled directory
+                self::persistFile(
+                    $exceptionClass,
+                    self::generateFileCode($exceptionClass, $extendFromClass)
+                );
             }
 
-            // Persist generated exceptionClass into file under compiled directory
-            self::persistFile(
-                $exceptionClass,
-                self::generateFileCode($exceptionClass, $extendFromClass)
-            );
-
-            // Load custom generated class
-            self::loadCustomException(self::getFileSystem()->getCompiledExceptions([$exceptionClass])->current());
+            if (self::autoloadEnabled()) {
+                // Load custom generated class
+                self::loadCustomException(self::getFileSystem()->getCompiledExceptions([$exceptionClass])->current());
+            } else {
+                $reflection = self::reflectFromFile(self::getCompilePath() . self::makeFileName($exceptionClass));
+            }
         }
+
+        $reflection = $reflection ?? self::reflectFromClassName($exceptionClass);
+
 
         // Get exceptionClass interfaces
         // The reason we do not get an instance here and use instanceof is because if we get an instance here
         // then the event will be triggered and also:
         // PHP gets the line on which the object was instantiated [http://php.net/manual/en/throwable.getline.php]
-        $interfaces = (new \ReflectionClass($exceptionClass))->getInterfaceNames();
+        $interfaces = $reflection->getInterfaceNames();
 
         // Make sure that the requested class is \Throwable
         if (!\in_array(\Throwable::class, $interfaces, true)) {
@@ -115,6 +127,7 @@ class Fault implements IFaultManager
         }
 
         // Get exception instance
+        //TODO: Use native Reflection untill this is solved: https://github.com/Roave/BetterReflection/pull/375
         /** @var \Throwable $exception */
         $exception = (new \ReflectionClass($exceptionClass))->newInstanceArgs($params);
 

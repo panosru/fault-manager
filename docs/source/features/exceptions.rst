@@ -52,8 +52,8 @@ or :php:meth:`Fault::exception()` methods and get all the benefits of Fault Mana
     :caption: /Fault.php
     :name: Fault.php
     :emphasize-lines: 8
-    :lines: 138-147
-    :lineno-start: 138
+    :lines: 151-160
+    :lineno-start: 151
     :linenos:
 
 Message Arguments

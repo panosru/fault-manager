@@ -45,6 +45,5 @@ To set your compile path to another path you can use :php:meth:`Fault::setCompil
 Autoload Compiled Exceptions
 ----------------------------
 
-That is something automatically done by the component by autoloading internally the ``autoload.php`` file of the
-component and by calling :php:meth:`Fault::autoloadCompiledExceptions()` method, so nothing needs to be done from
-your side ;)
+To enable autoloading of your generated exception classes you can call :php:meth:`Fault::autoloadCompiledExceptions`
+method. Otherwise your generated Exception will be accessed only fia :php:class:`Fault` class.
