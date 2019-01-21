@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c3144cee3bd1ff3bfba69c8b67200f2c",
+    "content-hash": "e6ba6c1aca26a40146bb54d349c87f2b",
     "packages": [
         {
             "name": "hoa/consistency",
@@ -2302,7 +2302,7 @@
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.1"
+        "php": "^7.2"
     },
     "platform-dev": []
 }

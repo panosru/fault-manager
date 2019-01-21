@@ -16,7 +16,7 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7.1",
+    "php": "^7.2",
     "hoa/exception": "2.17.08.30",
     "league/flysystem": "1.0.44",
     "roave/better-reflection": "^3.2",
