@@ -46,4 +46,4 @@ Autoload Compiled Exceptions
 ----------------------------
 
 To enable autoloading of your generated exception classes you can call :php:meth:`Fault::autoloadCompiledExceptions`
-method. Otherwise your generated Exception will be accessed only fia :php:class:`Fault` class.
+method. Otherwise your generated Exception will be accessed only via :php:class:`Fault` class.
