@@ -16,5 +16,4 @@ namespace Omega\FaultManager\Interfaces;
  */
 interface FaultManagerException
 {
-
 }
