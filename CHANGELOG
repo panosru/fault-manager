@@ -3,6 +3,8 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.4 - Use Better Reflection and load exceptions on demand rather than preloading them
+      22/01/2019 13:49  1.4.2  Minor code style fix
+         5d379b0 minor styling ci fix
       22/01/2019 13:44  1.4.1  Drop support for php 7.1 and allowing to use any name for the generated exception
          3fd2268 - Allowing to generate an exception with any name without restriction - Refactored the naming of various classes and methods
          63eeae4 - drop 7.1 support (updated composer)
