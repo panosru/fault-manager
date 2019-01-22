@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 /**
  * Author: panosru
- * Date: 22/04/2018
- * Time: 14:12
+ * Date: 20/02/2018
+ * Time: 02:25
  */
 
 namespace Omega\FaultManager\Exceptions;
@@ -13,15 +13,12 @@ namespace Omega\FaultManager\Exceptions;
 use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException;
 
 /**
- * Class NamespacedErrorException
+ * Class BaseError
  * @package Omega\FaultManager\Exceptions
  * @codeCoverageIgnore
  */
-class NamespacedErrorException extends AFaultManagerException
+class BaseError extends AFaultManagerException
 {
     /** @var int */
-    protected $code = 66005;
-
-    /** @var string */
-    protected $message = 'Namespaces in custom exceptions are not supported (yet).';
+    protected $code = 66001;
 }

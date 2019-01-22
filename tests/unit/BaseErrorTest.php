@@ -10,24 +10,24 @@ declare(strict_types = 1);
 
 namespace Omega\FaultManagerTests;
 
-use Omega\FaultManager\Exceptions\FaultManagerException;
+use Omega\FaultManager\Exceptions\BaseError;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class FaultManagerExceptionTest
- * @coversDefaultClass \Omega\FaultManager\Exceptions\FaultManagerException
+ * Class BaseErrorTest
+ * @coversDefaultClass \Omega\FaultManager\Exceptions\BaseError
  */
-class FaultManagerExceptionTest extends TestCase
+class BaseErrorTest extends TestCase
 {
     /**
      * @test
      * @covers ::__construct()
-     * @expectedException Omega\FaultManager\Exceptions\FaultManagerException
+     * @expectedException \Omega\FaultManager\Exceptions\BaseError
      * @expectedExceptionMessage exception message
      * @expectedExceptionCode 66001
      */
     public function isThrowable(): void
     {
-        throw new FaultManagerException('exception message');
+        throw new BaseError('exception message');
     }
 }

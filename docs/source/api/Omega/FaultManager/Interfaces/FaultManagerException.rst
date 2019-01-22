@@ -13,12 +13,3 @@ FaultManagerException
 .. php:interface:: FaultManagerException
 
 
-
-Constants
----------
-
-.. php:const:: EXCEPTION_CLASS_END = Exception
-
-	:Type: string 
-
-

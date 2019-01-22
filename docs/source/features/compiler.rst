@@ -14,11 +14,11 @@ project is ``./vendor/omegad-biz/fault-manager/_compiled/``.
 Compile Path
 ------------
 
-To get your current compile path you can use :php:meth:`Fault::getCompilePath()` method as shown in the below example:
+To get your current compile path you can use :php:meth:`Fault::compilePath()` method as shown in the below example:
 
 .. sourcecode:: php
 
-    $current_path = Fault::getCompilePath();
+    $current_path = Fault::compilePath();
 
 
 To set your compile path to another path you can use :php:meth:`Fault::setCompilePath(string $path)` method:
@@ -27,7 +27,7 @@ To set your compile path to another path you can use :php:meth:`Fault::setCompil
 
     Fault::setCompilePath('/my/other/abosule/path/');
 
-    $current_path = Fault::getCompilePath(); // will now show "/my/other/absolute/path/"
+    $current_path = Fault::compilePath(); // will now show "/my/other/absolute/path/"
 
 .. note::
 

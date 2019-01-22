@@ -12,8 +12,11 @@ namespace Omega\FaultManager\Plugins;
 
 use League\Flysystem\FilesystemInterface as IFilesystemInterface;
 use League\Flysystem\PluginInterface as IPluginInterface;
-use Omega\FaultManager\Interfaces\FaultManagerException as IFaultManagerException;
 
+/**
+ * Class CompiledExceptions
+ * @package Omega\FaultManager\Plugins
+ */
 class CompiledExceptions implements IPluginInterface
 {
     /** @var bool */
@@ -38,7 +41,7 @@ class CompiledExceptions implements IPluginInterface
      */
     public function getMethod(): string
     {
-        return 'getCompiledExceptions';
+        return 'compiledExceptions';
     }
 
     /**
@@ -48,18 +51,12 @@ class CompiledExceptions implements IPluginInterface
      */
     public function handle(?array $filter = null, bool $whitelist = true): \Generator
     {
-        $path = \Omega\FaultManager\Fault::getCompilePath();
+        $path = \Omega\FaultManager\Fault::compilePath();
         $files = $this->filesystem->listContents();
 
         foreach ($files as $file) {
             // Check if the extension is php
             if (0 !== \strcmp('php', $file['extension'])) {
-                continue;
-            }
-
-            // check for proper file name
-            $len = \strlen(IFaultManagerException::EXCEPTION_CLASS_END);
-            if (IFaultManagerException::EXCEPTION_CLASS_END !== \substr($file['filename'], -$len)) {
                 continue;
             }
 

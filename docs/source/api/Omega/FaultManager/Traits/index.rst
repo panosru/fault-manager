@@ -17,9 +17,10 @@ Traits
 
 .. toctree::
 	:maxdepth: 8
-	
-	FaultMutator <FaultMutator>
+
 	FaultEventStream <FaultEventStream>
 	FaultGenerator <FaultGenerator>
+	FaultMutator <FaultMutator>
+	FaultReflector <FaultReflector>
 
 

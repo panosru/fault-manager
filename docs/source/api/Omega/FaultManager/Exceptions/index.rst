@@ -17,12 +17,11 @@ Classes
 
 .. toctree::
 	:maxdepth: 8
-	
-	EmptyErrorNameException <EmptyErrorNameException>
-	FaultManagerException <FaultManagerException>
-	InvalidCompilePathException <InvalidCompilePathException>
-	EventHandlerExistsException <EventHandlerExistsException>
-	NamespacedErrorException <NamespacedErrorException>
-	IncompatibleErrorNameException <IncompatibleErrorNameException>
+
+	BaseError <BaseError>
+	EventHandlerAlreadyExists <EventHandlerAlreadyExists>
+	ExceptionNameIsEmpty <ExceptionNameIsEmpty>
+	InvalidCompilePath <InvalidCompilePath>
+	NamespaceError <NamespaceError>
 
 

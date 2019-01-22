@@ -18,9 +18,9 @@ Take the following as example:
     :caption: Generate Custom Exception
     :name: generate-custom-exception
 
-    Fault::throw('CustomException', 'a message here');
+    Fault::throw('CustomError', 'a message here');
 
-:php:class:`CustomException` class is not yet defined anywhere in our project, what Fault Manager will do is:
+:php:class:`CustomError` class is not yet defined anywhere in our project, what Fault Manager will do is:
 
 Check if a class with that name already exists
 
@@ -34,12 +34,12 @@ Check if a class with that name already exists
 The above example will produce the following file:
 
 .. code-block:: php
-    :caption: CustomException.php
+    :caption: CustomError.php
     :name: custom-exception-php
 
     <?php
 
-    class CustomException extends Exception
+    class CustomError extends Exception
     {
 
 
@@ -54,11 +54,7 @@ Rules
 
 There are few rules to follow in order to generate a custom exception class:
 
-#. If you pass an empty string as :php:attr:`$exceptionClass` a :php:class:`EmptyErrorNameException` will be thrown
+#. If you pass an empty string as :php:attr:`$exceptionClass` a :php:class:`ExceptionNameIsEmpty` exception will be thrown
 
-#. If you try to generate a namespaced custom exception a :php:class:`NamespacedErrorException` will be thrown as that
+#. If you try to generate a namespaced custom exception a :php:class:`NamespaceError` exception will be thrown as that
    `feature <https://github.com/omegad-biz/fault-manager/issues/4>`_ is not yet supported
-
-#. In order to generate a custom exception, the name of the exception must end-up with ``Exception``.
-   That is valid: ``CustomException`` while that is not: ``CustomError``, the later will raise
-   :php:class:`IncompatibleErrorNameException`

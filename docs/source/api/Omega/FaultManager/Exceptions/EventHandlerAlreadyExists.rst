@@ -4,35 +4,35 @@
 	:language: php
 
 
-EventHandlerExistsException
+EventHandlerAlreadyExists
 ===========================
 
 
 .. php:namespace:: Omega\FaultManager\Exceptions
 
-.. php:class:: EventHandlerExistsException
+.. php:class:: EventHandlerAlreadyExists
 
 
 	.. rst-class:: phpdoc-description
-	
-		| Class EventHandlerExistsException
-		
-	
+
+		| Class EventHandlerAlreadyExists
+
+
 	:Parent:
 		:php:class:`Omega\\FaultManager\\Abstracts\\FaultManagerException`
-	
+
 
 Properties
 ----------
 
 .. php:attr:: protected static code
 
-	:Type: int 
+	:Type: int
 
 
 .. php:attr:: protected static message
 
-	:Type: string 
+	:Type: string
 
 
 Methods
@@ -41,17 +41,17 @@ Methods
 .. rst-class:: public
 
 	.. php:method:: public __construct( $eventHandler)
-	
-		.. rst-class:: phpdoc-description
-		
-			| InvalidCompilePathException constructor\.
-			
-		
-		
-		:Parameters:
-			* **$eventHandler** (string)  
 
-		
-	
-	
+		.. rst-class:: phpdoc-description
+
+			| EventHandlerAlreadyExists constructor\.
+
+
+
+		:Parameters:
+			* **$eventHandler** (string)
+
+
+
+
 

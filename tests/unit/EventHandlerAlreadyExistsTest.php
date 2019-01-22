@@ -10,24 +10,24 @@ declare(strict_types = 1);
 
 namespace Omega\FaultManagerTests;
 
-use Omega\FaultManager\Exceptions\EventHandlerExistsException;
+use Omega\FaultManager\Exceptions\EventHandlerAlreadyExists;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class EventHandlerExistsExceptionTest
- * @coversDefaultClass \Omega\FaultManager\Exceptions\EventHandlerExistsException
+ * Class EventHandlerAlreadyExistsTest
+ * @coversDefaultClass \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
  */
-class EventHandlerExistsExceptionTest extends TestCase
+class EventHandlerAlreadyExistsTest extends TestCase
 {
     /**
      * @test
      * @covers ::__construct()
-     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerExistsException
+     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
      * @expectedExceptionMessage A handler for "Exception" already exists.
      * @expectedExceptionCode 66006
      */
     public function isThrowable(): void
     {
-        throw new EventHandlerExistsException(\Exception::class);
+        throw new EventHandlerAlreadyExists(\Exception::class);
     }
 }

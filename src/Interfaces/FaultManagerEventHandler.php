@@ -10,7 +10,15 @@ declare(strict_types=1);
 
 namespace Omega\FaultManager\Interfaces;
 
+/**
+ * Interface FaultManagerEventHandler
+ * @package Omega\FaultManager\Interfaces
+ */
 interface FaultManagerEventHandler
 {
+    /**
+     * @param \Throwable $exception
+     * @return mixed
+     */
     public function __invoke(\Throwable $exception);
 }

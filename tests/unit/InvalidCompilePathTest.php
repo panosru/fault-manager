@@ -10,24 +10,24 @@ declare(strict_types = 1);
 
 namespace Omega\FaultManagerTests;
 
-use Omega\FaultManager\Exceptions\InvalidCompilePathException;
+use Omega\FaultManager\Exceptions\InvalidCompilePath;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class InvalidCompilePathExceptionTest
- * @coversDefaultClass \Omega\FaultManager\Exceptions\InvalidCompilePathException
+ * Class InvalidCompilePathTest
+ * @coversDefaultClass \Omega\FaultManager\Exceptions\InvalidCompilePath
  */
-class InvalidCompilePathExceptionTest extends TestCase
+class InvalidCompilePathTest extends TestCase
 {
     /**
      * @test
      * @covers ::__construct()
-     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePath
      * @expectedExceptionMessage Path "invalid/path" does not exist or is not writable.
      * @expectedExceptionCode 66004
      */
     public function isThrowable(): void
     {
-        throw new InvalidCompilePathException('invalid/path');
+        throw new InvalidCompilePath('invalid/path');
     }
 }

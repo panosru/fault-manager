@@ -4,35 +4,35 @@
 	:language: php
 
 
-InvalidCompilePathException
+InvalidCompilePath
 ===========================
 
 
 .. php:namespace:: Omega\FaultManager\Exceptions
 
-.. php:class:: InvalidCompilePathException
+.. php:class:: InvalidCompilePath
 
 
 	.. rst-class:: phpdoc-description
-	
-		| Class InvalidCompilePathException
-		
-	
+
+		| Class InvalidCompilePath
+
+
 	:Parent:
 		:php:class:`Omega\\FaultManager\\Abstracts\\FaultManagerException`
-	
+
 
 Properties
 ----------
 
 .. php:attr:: protected static code
 
-	:Type: int 
+	:Type: int
 
 
 .. php:attr:: protected static message
 
-	:Type: string 
+	:Type: string
 
 
 Methods
@@ -41,17 +41,17 @@ Methods
 .. rst-class:: public
 
 	.. php:method:: public __construct( $path)
-	
-		.. rst-class:: phpdoc-description
-		
-			| InvalidCompilePathException constructor\.
-			
-		
-		
-		:Parameters:
-			* **$path** (string)  
 
-		
-	
-	
+		.. rst-class:: phpdoc-description
+
+			| InvalidCompilePath constructor\.
+
+
+
+		:Parameters:
+			* **$path** (string)
+
+
+
+
 

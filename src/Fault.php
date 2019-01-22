@@ -47,7 +47,7 @@ class Fault implements IFaultManager
     ): \Throwable {
         // Check if $class is empty
         if (empty($exceptionClass)) {
-            throw new Exceptions\EmptyErrorNameException();
+            throw new Exceptions\ExceptionNameIsEmpty();
         }
 
         $params = [&$message, $code, $previous];
@@ -62,22 +62,16 @@ class Fault implements IFaultManager
         if (!@\class_exists($exceptionClass)) {
             // Check if is namespace
             if (false !== \strpos($exceptionClass, '\\')) {
-                throw new Exceptions\NamespacedErrorException();
-            }
-
-            // Check if $class has compatible exception class name
-            $len = \strlen(Exceptions\FaultManagerException::EXCEPTION_CLASS_END);
-            if (Exceptions\FaultManagerException::EXCEPTION_CLASS_END !== \substr($exceptionClass, -$len)) {
-                throw new Exceptions\IncompatibleErrorNameException($exceptionClass);
+                throw new Exceptions\NamespaceError();
             }
 
             // Check if the class already exists
-            if (!self::getFileSystem()->has(self::makeFileName($exceptionClass))) {
+            if (!self::fileSystem()->has(self::makeFileName($exceptionClass))) {
                 // Default class to extend from
                 $extendFromClass = \Exception::class;
 
                 if (self::isEventStreamEnabled()) {
-                    // Since EventStream is enabled then we extend from FaultManagerException Abstract
+                    // Since EventStream is enabled then we extend from BaseError Abstract
                     $extendFromClass = Abstracts\FaultManagerException::class; // @codeCoverageIgnore
                 }
 
@@ -90,9 +84,9 @@ class Fault implements IFaultManager
 
             if (self::autoloadEnabled()) {
                 // Load custom generated class
-                self::loadCustomException(self::getFileSystem()->getCompiledExceptions([$exceptionClass])->current());
+                self::loadCustomException(self::fileSystem()->compiledExceptions([$exceptionClass])->current());
             } else {
-                $reflection = self::reflectFromFile(self::getCompilePath() . self::makeFileName($exceptionClass));
+                $reflection = self::reflectFromFile(self::compilePath() . self::makeFileName($exceptionClass));
             }
         }
 
@@ -107,7 +101,7 @@ class Fault implements IFaultManager
 
         // Make sure that the requested class is \Throwable
         if (!\in_array(\Throwable::class, $interfaces, true)) {
-            throw new Exceptions\FaultManagerException(
+            throw new Exceptions\BaseError(
                 'The class "%s" does not implements Throwable interface.',
                 null,
                 null,
@@ -115,7 +109,7 @@ class Fault implements IFaultManager
             );
         }
 
-        // Check if exceptionClass implements FaultManagerException interface or if is a Hoa\Exception
+        // Check if exceptionClass implements BaseError interface or if is a Hoa\Exception
         if (\in_array(Interfaces\FaultManagerException::class, $interfaces, true) ||
             \in_array('Hoa\Exception', $interfaces, true)
         ) {

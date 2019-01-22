@@ -14,13 +14,9 @@ FaultGenerator
 
 
 	.. rst-class:: phpdoc-description
-	
-		| Trait FaultGenerator
-		
-	
 
-Properties
-----------
+		| Trait FaultGenerator
+
 
 Methods
 -------
@@ -28,39 +24,39 @@ Methods
 .. rst-class:: public static
 
 	.. php:method:: public static setCompilePath( $path)
-	
-		
-		:Parameters:
-			* **$path** (string)  
 
-		
-		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePathException <Omega\\FaultManager\\Exceptions\\InvalidCompilePathException>
-	
-	
+
+		:Parameters:
+			* **$path** (string)
+
+
+		:Throws: \\Omega\\FaultManager\\Exceptions\\InvalidCompilePath <Omega\\FaultManager\\Exceptions\\InvalidCompilePath>
+
+
 
 .. rst-class:: public static
 
-	.. php:method:: public static getCompilePath()
-	
+	.. php:method:: public static compilePath()
+
 		.. rst-class:: phpdoc-description
-		
+
 			| \{@inheritdoc\}
-			
-		
-		
-	
-	
+
+
+
+
+
 
 .. rst-class:: public static
 
 	.. php:method:: public static autoloadCompiledExceptions()
-	
+
 		.. rst-class:: phpdoc-description
-		
+
 			| \{@inheritdoc\}
-			
-		
-		
-	
-	
+
+
+
+
+
 

@@ -10,8 +10,11 @@ declare(strict_types=1);
 
 namespace Omega\FaultManager\Interfaces;
 
+/**
+ * Interface FaultManagerException
+ * @package Omega\FaultManager\Interfaces
+ */
 interface FaultManagerException
 {
-    /** @var string */
-    public const EXCEPTION_CLASS_END = 'Exception';
+
 }

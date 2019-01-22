@@ -58,7 +58,7 @@ class CompiledExceptionsTest extends TestCase
      */
     public function checkIfMethodNameIsValid(): void
     {
-        self::assertEquals('getCompiledExceptions', (new CompiledExceptions())->getMethod());
+        self::assertEquals('compiledExceptions', (new CompiledExceptions())->getMethod());
     }
 
     /**
@@ -86,10 +86,6 @@ class CompiledExceptionsTest extends TestCase
             ],
             [
                 'extension' => 'invalid'
-            ],
-            [
-                'extension' => 'php',
-                'filename' => 'InvalidFilename'
             ]
         ];
 
@@ -100,7 +96,7 @@ class CompiledExceptionsTest extends TestCase
         $files = $stub->handle();
 
         while ($file = $files->current()) {
-            self::assertEquals(Fault::getCompilePath() . $returns[$files->key()]['path'], $file);
+            self::assertEquals(Fault::compilePath() . $returns[$files->key()]['path'], $file);
             $files->next();
         }
     }
@@ -140,7 +136,7 @@ class CompiledExceptionsTest extends TestCase
         $counter = 0;
         while ($file = $files->current()) {
             $counter++;
-            self::assertEquals(Fault::getCompilePath() . $returns[1]['path'], $file);
+            self::assertEquals(Fault::compilePath() . $returns[1]['path'], $file);
             $files->next();
         }
         self::assertEquals(1, $counter);
@@ -151,7 +147,7 @@ class CompiledExceptionsTest extends TestCase
         $counter = 0;
         while ($file = $files->current()) {
             $counter++;
-            self::assertEquals(Fault::getCompilePath() . $returns[0]['path'], $file);
+            self::assertEquals(Fault::compilePath() . $returns[0]['path'], $file);
             $files->next();
         }
         self::assertEquals(1, $counter);

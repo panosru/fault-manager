@@ -13,24 +13,24 @@ namespace Omega\FaultManager\Exceptions;
 use Omega\FaultManager\Abstracts\FaultManagerException as AFaultManagerException;
 
 /**
- * Class EventHandlerExistsException
+ * Class InvalidCompilePath
  * @package Omega\FaultManager\Exceptions
  */
-class EventHandlerExistsException extends AFaultManagerException
+class InvalidCompilePath extends AFaultManagerException
 {
     /** @var int */
-    protected $code = 66006;
+    protected $code = 66004;
 
     /** @var string */
-    protected $message = 'A handler for "%s" already exists.';
+    protected $message = 'Path "%s" does not exist or is not writable.';
 
     /**
-     * InvalidCompilePathException constructor.
-     * @param string $eventHandler
+     * InvalidCompilePath constructor.
+     * @param string $path
      */
-    public function __construct(string $eventHandler)
+    public function __construct(string $path)
     {
-        $this->arguments[] = $eventHandler;
+        $this->arguments[] = $path;
 
         parent::__construct();
     }

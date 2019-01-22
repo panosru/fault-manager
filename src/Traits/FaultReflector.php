@@ -25,13 +25,16 @@ use Roave\BetterReflection\SourceLocator\Type\SingleFileSourceLocator;
  */
 trait FaultReflector
 {
+    /** @var BetterReflection */
+    private static $reflection;
+
     /**
      * @param string $className
      * @return ReflectionClass
      */
     protected static function reflectFromClassName(string $className): ReflectionClass
     {
-        return (new BetterReflection())->classReflector()->reflect($className);
+        return self::reflection()->classReflector()->reflect($className);
     }
 
     /**
@@ -40,7 +43,7 @@ trait FaultReflector
      */
     protected static function reflectFromFile(string $path): ReflectionClass
     {
-        $astLocator = (new BetterReflection())->astLocator();
+        $astLocator = self::reflection()->astLocator();
         $reflector = new ClassReflector(new AggregateSourceLocator([
             new SingleFileSourceLocator($path, $astLocator),
             new ComposerSourceLocator((require __DIR__ . '/../../vendor/autoload.php'), $astLocator),
@@ -53,6 +56,14 @@ trait FaultReflector
         self::loadClass($reflection);
 
         return $reflection;
+    }
+
+    /**
+     * @return BetterReflection
+     */
+    private static function reflection(): BetterReflection
+    {
+        return self::$reflection ?? new BetterReflection();
     }
 
     /**

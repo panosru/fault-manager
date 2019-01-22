@@ -12,7 +12,7 @@ namespace Omega\FaultManager\Traits;
 
 use Hoa\Event\Bucket;
 use Hoa\Event\Event;
-use Omega\FaultManager\Exceptions\EventHandlerExistsException;
+use Omega\FaultManager\Exceptions\EventHandlerAlreadyExists;
 use Omega\FaultManager\Interfaces\FaultManagerEventHandler as IFaultManagerEventHandler;
 
 /**
@@ -78,7 +78,7 @@ trait FaultEventStream
         bool $override = false
     ): void {
         if (\array_key_exists($eventId, self::$handlers) && !$override) {
-            throw new EventHandlerExistsException($eventId);
+            throw new EventHandlerAlreadyExists($eventId);
         }
 
         self::$handlers[$eventId] = $handler;

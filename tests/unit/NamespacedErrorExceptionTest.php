@@ -10,12 +10,12 @@ declare(strict_types = 1);
 
 namespace Omega\FaultManagerTests;
 
-use Omega\FaultManager\Exceptions\NamespacedErrorException;
+use Omega\FaultManager\Exceptions\NamespaceError;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class NamespacedErrorExceptionTest
- * @coversDefaultClass \Omega\FaultManager\Exceptions\NamespacedErrorException
+ * @coversDefaultClass \Omega\FaultManager\Exceptions\NamespaceError
  */
 class NamespacedErrorExceptionTest extends TestCase
 {
@@ -23,12 +23,12 @@ class NamespacedErrorExceptionTest extends TestCase
      * @test
      * @covers ::getMessage()
      * @covers ::getCode()
-     * @expectedException \Omega\FaultManager\Exceptions\NamespacedErrorException
+     * @expectedException \Omega\FaultManager\Exceptions\NamespaceError
      * @expectedExceptionMessage Namespaces in custom exceptions are not supported (yet).
      * @expectedExceptionCode 66005
      */
     public function isThrowable(): void
     {
-        throw new NamespacedErrorException();
+        throw new NamespaceError();
     }
 }

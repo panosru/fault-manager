@@ -13,6 +13,10 @@ namespace Omega\FaultManager\Abstracts;
 use Omega\FaultManager\Interfaces\FaultManagerException as IFaultManagerException;
 use Omega\FaultManager\Traits\FaultMutator as TFaultMutator;
 
+/**
+ * Class FaultManagerException
+ * @package Omega\FaultManager\Abstracts
+ */
 abstract class FaultManagerException extends \Hoa\Exception\Exception implements IFaultManagerException
 {
     use TFaultMutator;

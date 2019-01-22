@@ -71,7 +71,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @covers ::getFileSystem()
+     * @covers ::fileSystem()
      * @expectedException \MyCustomTestingException
      * @expectedExceptionMessage custom exception message
      * @expectedExceptionCode 666
@@ -99,13 +99,13 @@ class FaultTest extends TestCase
      * @test
      * @covers ::exception()
      * @coversDefaultClass \Omega\FaultManager\Abstracts\FaultManagerException
-     * @expectedException \Omega\FaultManager\Exceptions\EmptyErrorNameException
+     * @expectedException \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
      * @expectedExceptionMessage Exception class must not be empty.
      * @expectedExceptionCode 66002
      */
     public function throwsExistingNamespacedException(): void
     {
-        throw Fault::exception(\Omega\FaultManager\Exceptions\EmptyErrorNameException::class);
+        throw Fault::exception(\Omega\FaultManager\Exceptions\ExceptionNameIsEmpty::class);
     }
 
     /**
@@ -163,7 +163,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::registerHandler()
-     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerExistsException
+     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
      */
     public function registerExistingEventHandlerWithoutOverride(): void
     {
@@ -306,7 +306,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\NamespacedErrorException
+     * @expectedException \Omega\FaultManager\Exceptions\NamespaceError
      */
     public function throwsExceptionIfNamespacedCustomExceptionIsProvided(): void
     {
@@ -316,7 +316,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\EmptyErrorNameException
+     * @expectedException \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
      */
     public function throwsExceptionIfNoExceptionNameIsGiven(): void
     {
@@ -326,17 +326,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
-     */
-    public function throwsExceptionIfIncompatibleNameIsGiven(): void
-    {
-        throw Fault::exception('IncompatibleClass');
-    }
-
-    /**
-     * @test
-     * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\FaultManagerException
+     * @expectedException \Omega\FaultManager\Exceptions\BaseError
      * @expectedExceptionMessage The class "NonThrowableMockException" does not implements Throwable interface.
      * @expectedExceptionCode 66001
      */
@@ -392,18 +382,18 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::setCompilePath()
-     * @covers ::getCompilePath()
+     * @covers ::compilePath()
      */
     public function checkCompilePath(): void
     {
         Fault::setCompilePath(__DIR__);
-        self::assertEquals(__DIR__ . \DIRECTORY_SEPARATOR, Fault::getCompilePath());
+        self::assertEquals(__DIR__ . \DIRECTORY_SEPARATOR, Fault::compilePath());
     }
 
     /**
      * @test
      * @covers ::setCompilePath()
-     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePath
      * @expectedExceptionMessage Path "/some/invalid/path/" does not exist or is not writable.
      * @expectedExceptionCode 66004
      */
@@ -448,7 +438,7 @@ class FaultTest extends TestCase
 
     /**
      * @test
-     * @covers ::getFileSystem()
+     * @covers ::fileSystem()
      * @covers ::makeFileName()
      * @covers ::persistFile()
      * @covers ::loadCustomException()
@@ -466,7 +456,7 @@ class FaultTest extends TestCase
 
         self::assertEquals(
             \md5_file(\dirname(__DIR__) . '/_support/test_exception_generated_code'),
-            \md5_file(Fault::getCompilePath() . self::TESTNIG_CUSTOM_EXCEPTION . '.php')
+            \md5_file(Fault::compilePath() . self::TESTNIG_CUSTOM_EXCEPTION . '.php')
         );
 
         Fault::enableEventStream();
@@ -478,13 +468,13 @@ class FaultTest extends TestCase
 
         self::assertEquals(
             \md5_file(\dirname(__DIR__) . '/_support/test_event_exception_generated_code'),
-            \md5_file(Fault::getCompilePath() . self::TESTING_CUSTOM_EVENT_EXCEPTION . '.php')
+            \md5_file(Fault::compilePath() . self::TESTING_CUSTOM_EVENT_EXCEPTION . '.php')
         );
     }
 
     /**
      * @before
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      * @throws \ReflectionException
      */
     protected function disableFaultEventStreamIfEnabled(): void
@@ -495,7 +485,7 @@ class FaultTest extends TestCase
             $reflector = new \ReflectionClass(Fault::class);
             $makeFileName = $reflector->getMethod('makeFileName');
             $makeFileName->setAccessible(true);
-            $fileSystem = $reflector->getMethod('getFileSystem');
+            $fileSystem = $reflector->getMethod('fileSystem');
             $fileSystem->setAccessible(true);
             $this->fileSystem = $fileSystem->invoke($reflector);
 

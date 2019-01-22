@@ -10,6 +10,10 @@ declare(strict_types=1);
 
 namespace Omega\FaultManager\Interfaces;
 
+/**
+ * Interface FaultManager
+ * @package Omega\FaultManager\Interfaces
+ */
 interface FaultManager
 {
     /** @var string */
@@ -24,11 +28,10 @@ interface FaultManager
      * @return \Throwable
      * @throws \Throwable
      * @throws \Omega\FaultManager\Abstracts\FaultManagerException
-     * @throws \Omega\FaultManager\Exceptions\FaultManagerException
-     * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
-     * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
-     * @throws \Omega\FaultManager\Exceptions\NamespacedErrorException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
      * @throws \Hoa\Event\Exception
      * @throws \ReflectionException
      */
@@ -48,11 +51,10 @@ interface FaultManager
      * @param array $arguments
      * @throws \Throwable
      * @throws \Omega\FaultManager\Abstracts\FaultManagerException
-     * @throws \Omega\FaultManager\Exceptions\FaultManagerException
-     * @throws \Omega\FaultManager\Exceptions\EmptyErrorNameException
-     * @throws \Omega\FaultManager\Exceptions\IncompatibleErrorNameException
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
-     * @throws \Omega\FaultManager\Exceptions\NamespacedErrorException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
      * @throws \Hoa\Event\Exception
      * @throws \ReflectionException
      */
@@ -68,7 +70,7 @@ interface FaultManager
      * @param string $eventId
      * @param FaultManagerEventHandler $handler
      * @param bool $override
-     * @throws \Omega\FaultManager\Exceptions\EventHandlerExistsException
+     * @throws \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
      */
     public static function registerHandler(
         string $eventId,
@@ -95,7 +97,7 @@ interface FaultManager
     /**
      * Set compile path
      * @param string $path
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
     public static function setCompilePath(string $path): void;
 
@@ -103,11 +105,11 @@ interface FaultManager
      * Get compile path
      * @return string
      */
-    public static function getCompilePath(): string;
+    public static function compilePath(): string;
 
     /**
      * Autoload compiled exceptions
-     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePathException
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
     public static function autoloadCompiledExceptions(): void;
 }

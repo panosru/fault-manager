@@ -4,34 +4,34 @@
 	:language: php
 
 
-EmptyErrorNameException
-=======================
+NamespaceError
+========================
 
 
 .. php:namespace:: Omega\FaultManager\Exceptions
 
-.. php:class:: EmptyErrorNameException
+.. php:class:: NamespaceError
 
 
 	.. rst-class:: phpdoc-description
-	
-		| Class EmptyErrorNameException
-		
-	
+
+		| Class NamespaceError
+
+
 	:Parent:
 		:php:class:`Omega\\FaultManager\\Abstracts\\FaultManagerException`
-	
+
 
 Properties
 ----------
 
 .. php:attr:: protected static code
 
-	:Type: int 
+	:Type: int
 
 
 .. php:attr:: protected static message
 
-	:Type: string 
+	:Type: string
 
 
