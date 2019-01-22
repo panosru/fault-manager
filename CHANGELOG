@@ -3,6 +3,11 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.4 - Use Better Reflection and load exceptions on demand rather than preloading them
+      22/01/2019 13:44  1.4.1  Drop support for php 7.1 and allowing to use any name for the generated exception
+         3fd2268 - Allowing to generate an exception with any name without restriction - Refactored the naming of various classes and methods
+         63eeae4 - drop 7.1 support (updated composer)
+         a38ccb8 - drop 7.1 support testing for travis
+         f66924b - minor typo on docs
       21/01/2019 23:56  1.4.0  initial release
          10aace0 - Fix autoloading issues - Use Better Reflection - Load Exception on call - Updated docs
          976ca6e update dependencies
