@@ -1,0 +1,15 @@
+magephp:
+  environments:
+    production:
+      user: root
+      branch: develop
+      from: ./src
+      host_path: /root/projects/fault-manager
+      releases: 2
+      exclude:
+        - ./Traits
+      hosts:
+        - droplet-tecfinity
+
+      on-deploy:
+        - fs/copy: { from: 'Fault.php', to: 'Fault2.php' }
