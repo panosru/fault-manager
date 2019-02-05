@@ -21,6 +21,7 @@ use Omega\FaultManager\Interfaces\FaultManagerEventHandler as IFaultManagerEvent
  */
 trait FaultEventStream
 {
+    /** @var string */
     private static $eventStreamId = 'hoa://Event/Exception';
 
     /** @var bool */

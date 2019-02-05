@@ -1,0 +1,60 @@
+build_settings:
+  directory: ./src
+  ignore:
+    - ./vendor
+    - ./tests
+    - ./docs
+    - ./build
+    - ./_compiled
+  allowed_warnings: -1
+
+setup:
+  composer:
+    action: install
+
+test:
+
+  php_unit:
+    config:
+      - phpunit.xml.dist
+    directories:
+      - tests
+    coverage: true
+
+  security_checker: ~
+
+  php_parallel_lint: ~
+
+  pdepend: ~
+
+  phan: ~
+
+  php_code_sniffer:
+    standard: PSR2
+    allowed_errors: -1
+
+  php_cpd: ~
+
+  php_docblock_checker: ~
+
+  php_loc: ~
+
+  php_mess_detector:
+    rules:
+      - cleancode
+      - controversial
+      - codesize
+      - design
+      - naming
+      - unusedcode
+
+  technical_debt: ~
+
+failure:
+  email:
+    committer: true
+    default_mailto_address: panosru@me.com
+
+complete:
+  email:
+    default_mailto_address: panosru@me.com
