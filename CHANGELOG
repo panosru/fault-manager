@@ -3,6 +3,13 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.4 - Use Better Reflection and load exceptions on demand rather than preloading them
+      20/09/2019 14:06  1.4.3  minor updates
+         179e19b - removed magephp config
+         f7d1bbf - replaced omegad-biz with panosru - updated docs to python 3 - updated composer packages - nothing has changed from code perspective
+         4c19e0b updated mage log path
+         278721e add log path for mage
+         d65dbce testing mage deploy (https://www.magephp.com/)
+         2f7a806 add php-censor.yml
       22/01/2019 13:49  1.4.2  Minor code style fix
          5d379b0 minor styling ci fix
       22/01/2019 13:44  1.4.1  Drop support for php 7.1 and allowing to use any name for the generated exception
