@@ -1,0 +1,17 @@
+includes:
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-phpunit/extension.neon
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-phpunit/rules.neon
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-strict-rules/rules.neon
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-php-parser/extension.neon
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-mockery/extension.neon
+  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-beberlei-assert/extension.neon
+#  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-doctrine/extension.neon
+#  - /Users/panoskosmidis/.composer/vendor/phpstan/phpstan-doctrine/rules.neon
+  - /Users/panoskosmidis/.composer/vendor/localheinz/phpstan-rules/rules.neon
+
+parameters:
+  level: max
+  paths:
+    - src
+    - tests
