@@ -32,7 +32,7 @@ Thanks for being interested! Here's our guidelines to contributing to that proje
 - We will review your changes and try to respond in a timely manner.
 
 ## Security Vulnerabilities
-If you discover a security vulnerability within the project, please do not make it public via issues board, instead send an email to Omega Business Development at info@omegad.biz. All security vulnerabilities will be promptly addressed.
+If you discover a security vulnerability within the project, please do not make it public via issues board, instead send an email to me at panoskosmidis87@gmail.com. All security vulnerabilities will be promptly addressed.
 
 ## Coding Style
 We follow the [PSR-2](https://www.php-fig.org/psr/psr-2/) coding standard and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading standard.

@@ -1,6 +1,6 @@
 {
-  "name": "omegad-biz/fault-manager",
-  "description": "Fault Manager library by Omega Business Development",
+  "name": "panosru/fault-manager",
+  "description": "Fault Manager library by panosru",
   "type": "library",
   "keywords": ["error handling", "exception handling", "error", "exception", "handler"],
   "minimum-stability": "dev",
@@ -8,8 +8,8 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Omega Business Development Limited",
-      "email": "info@omegad.biz"
+      "name": "Panagiotis Kosmidis",
+      "email": "panoskosmidis87@gmail.com"
     }
   ],
   "config": {

@@ -7,7 +7,7 @@ Compiler
 
 Not many things to do here since everything is done already by the component, but is strongly recommended to set your
 own compile folder on the root of your project rather than use the default path which in relation to the root of your
-project is ``./vendor/omegad-biz/fault-manager/_compiled/``.
+project is ``./vendor/panosru/fault-manager/_compiled/``.
 
 .. _features.compiler.path:
 

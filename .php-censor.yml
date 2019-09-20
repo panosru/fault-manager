@@ -1,5 +1,4 @@
 build_settings:
-  directory: ./src
   ignore:
     - ./vendor
     - ./tests
@@ -9,10 +8,42 @@ build_settings:
   allowed_warnings: -1
 
 setup:
+  env:
+    PHAN_ALLOW_XDEBUG: true
+
   composer:
     action: install
 
 test:
+  pdepend:
+    directory: ./src
+
+  php_code_sniffer:
+    standard: PSR2
+    allowed_errors: 0
+
+  php_cpd:
+    directory: ./src
+
+  php_docblock_checker:
+    directory: ./src
+    allowed_warnings: 20
+
+  php_loc:
+    directory: ./src
+
+  php_mess_detector:
+    directory: ./src
+    rules:
+      - cleancode
+      - controversial
+      - codesize
+      - design
+      - naming
+      - unusedcode
+
+  php_parallel_lint:
+    directory: ./src
 
   php_unit:
     config:
@@ -23,38 +54,42 @@ test:
 
   security_checker: ~
 
-  php_parallel_lint: ~
+  technical_debt:
+    directory: ./src
+    allowed_errors: 2
 
-  pdepend: ~
+#deploy:
+#  mage3:
+#    env: production
 
-  phan: ~
+success:
+  slack_notify:
+    webhook_url: "https://hooks.slack.com/services/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"
+    room: "#taiga"
+    username: "PHP Censor"
+    icon: ":ghost:"
+    message: "%PROJECT_TITLE% - build %BUILD% succeeded! :smiley:"
+    show_status: false
 
-  php_code_sniffer:
-    standard: PSR2
-    allowed_errors: -1
-
-  php_cpd: ~
-
-  php_docblock_checker: ~
-
-  php_loc: ~
-
-  php_mess_detector:
-    rules:
-      - cleancode
-      - controversial
-      - codesize
-      - design
-      - naming
-      - unusedcode
-
-  technical_debt: ~
 
 failure:
-  email:
-    committer: true
-    default_mailto_address: panosru@me.com
+  slack_notify:
+    webhook_url: "https://hooks.slack.com/services/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"
+    room: "#taiga"
+    username: "PHP Censor"
+    icon: ":ghost:"
+    message: "%PROJECT_TITLE% - build %BUILD% failed! :sleepy:"
+    show_status: false
 
 complete:
+  slack_notify:
+    webhook_url: "https://hooks.slack.com/services/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"
+    room: "#taiga"
+    username: "PHP Censor"
+    icon: ":ghost:"
+    message: "%PROJECT_TITLE% - build %BUILD% finished."
+    show_status: true
+
   email:
-    default_mailto_address: panosru@me.com
+    committer: true
+    default_mailto_address: "panosru@me.com"

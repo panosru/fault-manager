@@ -4,7 +4,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->
-| [<img src="https://avatars1.githubusercontent.com/u/3820828?v=4" width="100px;"/><br /><sub><b>Sasha Alex Romanenko</b></sub>](http://alex-tech-adventures.com)<br />[🐛](https://github.com/omegad-biz/fault-manager/issues?q=author%3Aalextech "Bug reports") [💻](https://github.com/omegad-biz/fault-manager/commits?author=alextech "Code") [🤔](#ideas-alextech "Ideas, Planning, & Feedback") [🚇](#infra-alextech "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-alextech "Packaging/porting to new platform") [🔌](#plugin-alextech "Plugin/utility libraries") [⚠️](https://github.com/omegad-biz/fault-manager/commits?author=alextech "Tests") [🔧](#tool-alextech "Tools") |
+| [<img src="https://avatars1.githubusercontent.com/u/3820828?v=4" width="100px;"/><br /><sub><b>Sasha Alex Romanenko</b></sub>](http://alex-tech-adventures.com)<br />[🐛](https://github.com/panosru/fault-manager/issues?q=author%3Aalextech "Bug reports") [💻](https://github.com/panosru/fault-manager/commits?author=alextech "Code") [🤔](#ideas-alextech "Ideas, Planning, & Feedback") [🚇](#infra-alextech "Infrastructure (Hosting, Build-Tools, etc)") [📦](#platform-alextech "Packaging/porting to new platform") [🔌](#plugin-alextech "Plugin/utility libraries") [⚠️](https://github.com/panosru/fault-manager/commits?author=alextech "Tests") [🔧](#tool-alextech "Tools") |
 | :---: |
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

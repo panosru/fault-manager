@@ -19,6 +19,8 @@ trait FaultMutator
 {
     /**
      * @param \Throwable $exception
+     *
+     * @throws \ReflectionException
      */
     protected static function mutate(\Throwable $exception): void
     {

@@ -57,4 +57,4 @@ There are few rules to follow in order to generate a custom exception class:
 #. If you pass an empty string as :php:attr:`$exceptionClass` a :php:class:`ExceptionNameIsEmpty` exception will be thrown
 
 #. If you try to generate a namespaced custom exception a :php:class:`NamespaceError` exception will be thrown as that
-   `feature <https://github.com/omegad-biz/fault-manager/issues/4>`_ is not yet supported
+   `feature <https://github.com/panosru/fault-manager/issues/4>`_ is not yet supported

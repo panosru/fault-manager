@@ -42,12 +42,13 @@ def get_last_branch_update( branch ):
     pipe = Popen(command % ('%ci', branch), stdout=PIPE, shell=True)
     last_update = pipe.stdout.read()
 
-    pipe = Popen(command % ('%cr', branch), stdout=PIPE, shell=True)
-    update_ago = pipe.stdout.read()
+    #pipe = Popen(command % ('%cr', branch), stdout=PIPE, shell=True)
+    #update_ago = pipe.stdout.read()
 
     if last_update:
         last_update = dateutil.parser.parse(last_update)
-        return "%s *( %s )*" % (last_update.strftime('%B %d, %Y'), update_ago)
+        #return "%s *( %s )*" % (last_update.strftime('%B %d, %Y'), update_ago)
+        return "%s" % (last_update.strftime('%B %d, %Y'))
     else:
         return 'unknown'
 
@@ -62,7 +63,7 @@ lexers['php-annotations'] = PhpLexer(startinline=True)
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 # sys.path.insert(0, os.path.abspath('../../src'))
 
-source_parsers = {
+source_suffix = {
     '.md': 'recommonmark.parser.CommonMarkParser',
 }
 
@@ -72,19 +73,19 @@ rst_epilog = rst_epilog + "\n.. |last_develop_update| replace:: %s" % get_last_b
 
 # -- Project information -----------------------------------------------------
 
-project = u'Fault Manager'
-copyright = u'2018, Omega Business Development Limited | MIT License'
-author = u'Panagiotis Kosmidis (@panosru)'
-epub_author = u'Panagiotis Kosmidis (@panosru)'
+project = 'Fault Manager'
+copyright = '2018 - 2019, MIT License'
+author = 'Panagiotis Kosmidis (@panosru)'
+epub_author = 'Panagiotis Kosmidis (@panosru)'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 #
 # The short X.Y version.
-version = get_version().strip()
+version = str(get_version().strip())
 # The full version, including alpha/beta/rc tags.
-release = get_version()
+release = str(get_version())
 
 # -- General configuration ---------------------------------------------------
 
@@ -146,11 +147,11 @@ on_rtd = os.environ.get('READTHEDOCS', None) == 'True'
 if not on_rtd:  # only import and set the theme if we're building docs locally
     import sphinx_rtd_theme
     html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
-    print sphinx_rtd_theme.get_html_theme_path()
+    print(sphinx_rtd_theme.get_html_theme_path())
 
 html_context = {
     "display_github": True, # Integrate GitHub
-    "github_user": "omegad-biz", # Username
+    "github_user": "panosru", # Username
     "github_repo": "fault-manager", # Repo name
     "github_version": "develop", # Version
     "conf_py_path": "/docs/source/", # Path in the checkout to the docs root
@@ -232,8 +233,8 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'FaultManager.tex', u'Fault Manager Documentation',
-     u'Panagiotis Kosmidis (@panosru)', 'manual'),
+    (master_doc, 'FaultManager.tex', 'Fault Manager Documentation',
+     'Panagiotis Kosmidis (@panosru)', 'manual'),
 ]
 
 
@@ -242,7 +243,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'faultmanager', u'Fault Manager Documentation',
+    (master_doc, 'faultmanager', 'Fault Manager Documentation',
      [author], 1)
 ]
 
@@ -253,7 +254,7 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'FaultManager', u'Fault Manager Documentation',
+    (master_doc, 'FaultManager', 'Fault Manager Documentation',
      author, 'FaultManager', 'One line description of project.',
      'Miscellaneous'),
 ]
