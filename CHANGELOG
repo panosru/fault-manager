@@ -3,6 +3,9 @@ VERSION 1  INITIAL RELEASE
 ==========================
 
    Version 1.4 - Use Better Reflection and load exceptions on demand rather than preloading them
+      20/07/2021 17:19  1.4.4  Security Fixes
+         3f3ae5a Security Fixes
+         0fad012 Release of new version 1.4.3
       20/09/2019 14:06  1.4.3  minor updates
          179e19b - removed magephp config
          f7d1bbf - replaced omegad-biz with panosru - updated docs to python 3 - updated composer packages - nothing has changed from code perspective
