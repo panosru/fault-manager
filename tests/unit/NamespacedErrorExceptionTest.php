@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:38
  */
+
+declare(strict_types=1);
 
 namespace Omega\FaultManagerTests;
 
@@ -23,12 +23,13 @@ class NamespacedErrorExceptionTest extends TestCase
      * @test
      * @covers ::getMessage()
      * @covers ::getCode()
-     * @expectedException \Omega\FaultManager\Exceptions\NamespaceError
-     * @expectedExceptionMessage Namespaces in custom exceptions are not supported (yet).
-     * @expectedExceptionCode 66005
      */
     public function isThrowable(): void
     {
+        $this->expectException(NamespaceError::class);
+        $this->expectExceptionMessage('Namespaces in custom exceptions are not supported (yet).');
+        $this->expectExceptionCode(66005);
+
         throw new NamespaceError();
     }
 }

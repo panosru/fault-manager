@@ -16,9 +16,9 @@
     "sort-packages": true
   },
   "require": {
-    "php": "^7.2",
+    "php": ">=7.4.1,<7.5.0",
     "hoa/exception": "2.17.08.30",
-    "league/flysystem": "1.0.44",
+    "league/flysystem": "~1.1.4",
     "roave/better-reflection": "^3.2",
     "zendframework/zend-code": "^3.3"
   },

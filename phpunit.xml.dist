@@ -2,63 +2,48 @@
 
 <phpunit
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.2/phpunit.xsd"
+        xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
         backupGlobals="false"
         backupStaticAttributes="false"
         bootstrap="vendor/autoload.php"
-        cacheTokens="true"
         colors="true"
         convertErrorsToExceptions="true"
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true"
         forceCoversAnnotation="true"
-        printerClass="PHPUnit\TextUI\ResultPrinter"
         processIsolation="false"
         stopOnError="false"
         stopOnFailure="false"
         stopOnIncomplete="false"
         stopOnSkipped="false"
         stopOnRisky="false"
-        testSuiteLoaderClass="PHPUnit\Runner\StandardTestSuiteLoader"
         timeoutForSmallTests="1"
         timeoutForMediumTests="10"
         timeoutForLargeTests="60"
         verbose="true">
-
-    <testsuites>
-        <testsuite name="Omega FaultManager Unit Test Suite">
-            <directory suffix="Test.php">tests/unit</directory>
-        </testsuite>
-    </testsuites>
-
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">src</directory>
-            <exclude>
-                <directory>vendor</directory>
-                <directory suffix=".php">tests</directory>
-                <directory suffix=".php">_compiled</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-
-    <logging>
-        <log type="coverage-html"
-             target="tests/coverage/html"
-             showUncoveredFiles="true"
-             lowUpperBound="60"
-             highLowerBound="95" />
-        <log type="coverage-clover"
-             target="tests/coverage/clover.xml"
-             showUncoveredFiles="true" />
-        <log type="coverage-php"
-             target="tests/coverage/coverage.serialized"
-             showUncoveredFiles="true" />
-        <log type="coverage-text"
-             target="php://stdout"
-             showUncoveredFiles="true" />
-        <log type="testdox-html" target="tests/coverage/testdox.html" />
-        <log type="testdox-text" target="php://stdout" />
-    </logging>
-
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">src</directory>
+    </include>
+    <exclude>
+      <directory>vendor</directory>
+      <directory suffix=".php">tests</directory>
+      <directory suffix=".php">_compiled</directory>
+    </exclude>
+    <report>
+      <clover outputFile="tests/coverage/clover.xml"/>
+      <html outputDirectory="tests/coverage/html" lowUpperBound="60" highLowerBound="95"/>
+      <php outputFile="tests/coverage/coverage.serialized"/>
+      <text outputFile="php://stdout" showUncoveredFiles="true"/>
+    </report>
+  </coverage>
+  <testsuites>
+    <testsuite name="Omega FaultManager Unit Test Suite">
+      <directory suffix="Test.php">tests/unit</directory>
+    </testsuite>
+  </testsuites>
+  <logging>
+    <testdoxHtml outputFile="tests/coverage/testdox.html"/>
+    <testdoxText outputFile="php://stdout"/>
+  </logging>
 </phpunit>
