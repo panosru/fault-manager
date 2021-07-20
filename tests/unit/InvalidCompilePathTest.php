@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:38
  */
+
+declare(strict_types=1);
 
 namespace Omega\FaultManagerTests;
 
@@ -22,12 +22,13 @@ class InvalidCompilePathTest extends TestCase
     /**
      * @test
      * @covers ::__construct()
-     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePath
-     * @expectedExceptionMessage Path "invalid/path" does not exist or is not writable.
-     * @expectedExceptionCode 66004
      */
     public function isThrowable(): void
     {
+        $this->expectException(InvalidCompilePath::class);
+        $this->expectExceptionMessage('Path "invalid/path" does not exist or is not writable.');
+        $this->expectExceptionCode(66004);
+
         throw new InvalidCompilePath('invalid/path');
     }
 }

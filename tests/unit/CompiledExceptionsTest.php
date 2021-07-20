@@ -1,15 +1,16 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Author: panosru
  * Date: 24/04/2018
  * Time: 17:05
  */
 
+declare(strict_types=1);
+
 namespace Omega\FaultManagerTests;
 
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
 use Omega\FaultManager\Fault;
 use Omega\FaultManager\Plugins\CompiledExceptions;
 use PHPUnit\Framework\TestCase;
@@ -21,15 +22,16 @@ use PHPUnit\Framework\TestCase;
  */
 class CompiledExceptionsTest extends TestCase
 {
-    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    use MockeryPHPUnitIntegration;
 
     /**
      * @test
      * @covers ::setFilesystem()
-     * @expectedException \TypeError
      */
     public function setInvalidFilesystem(): void
     {
+        $this->expectException(\TypeError::class);
+
         (new CompiledExceptions())->setFilesystem(new \stdClass());
     }
 

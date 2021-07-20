@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Omega\FaultManager\Traits;
 
 use League\Flysystem\Filesystem;
+use Omega\FaultManager\Exceptions\InvalidCompilePath;
 
 /**
  * Trait FaultGenerator
@@ -36,7 +37,7 @@ trait FaultGenerator
         $path = \rtrim($path, \DIRECTORY_SEPARATOR) . \DIRECTORY_SEPARATOR;
 
         if (!(\file_exists($path) && \is_dir($path) && \is_writable($path))) {
-            throw new \Omega\FaultManager\Exceptions\InvalidCompilePath($path);
+            throw new InvalidCompilePath($path);
         }
 
         self::$compiledPath = $path;
@@ -88,7 +89,7 @@ trait FaultGenerator
                 self::$filesystem = new Filesystem(new \League\Flysystem\Adapter\Local(self::compilePath()));
                 self::$filesystem->addPlugin(new \Omega\FaultManager\Plugins\CompiledExceptions());
             } catch (\LogicException $exception) {
-                throw new \Omega\FaultManager\Exceptions\InvalidCompilePath(self::compilePath());
+                throw new InvalidCompilePath(self::compilePath());
             }
             // @codeCoverageIgnoreEnd
         }

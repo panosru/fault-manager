@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:38
  */
+
+declare(strict_types=1);
 
 namespace Omega\FaultManagerTests;
 
@@ -22,12 +22,13 @@ class BaseErrorTest extends TestCase
     /**
      * @test
      * @covers ::__construct()
-     * @expectedException \Omega\FaultManager\Exceptions\BaseError
-     * @expectedExceptionMessage exception message
-     * @expectedExceptionCode 66001
      */
-    public function isThrowable(): void
+    final public function isThrowable(): void
     {
+        $this->expectException(BaseError::class);
+        $this->expectExceptionMessage("exception message");
+        $this->expectExceptionCode(66001);
+
         throw new BaseError('exception message');
     }
 }

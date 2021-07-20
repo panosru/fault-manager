@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:38
  */
+
+declare(strict_types=1);
 
 namespace Omega\FaultManagerTests;
 
@@ -22,12 +22,13 @@ class EventHandlerAlreadyExistsTest extends TestCase
     /**
      * @test
      * @covers ::__construct()
-     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
-     * @expectedExceptionMessage A handler for "Exception" already exists.
-     * @expectedExceptionCode 66006
      */
     public function isThrowable(): void
     {
+        $this->expectException(EventHandlerAlreadyExists::class);
+        $this->expectExceptionMessage('A handler for "Exception" already exists.');
+        $this->expectExceptionCode(66006);
+
         throw new EventHandlerAlreadyExists(\Exception::class);
     }
 }

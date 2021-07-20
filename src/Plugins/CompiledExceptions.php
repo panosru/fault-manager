@@ -1,12 +1,12 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * Author: panosru
  * Date: 24/04/2018
  * Time: 13:07
  */
+
+declare(strict_types=1);
 
 namespace Omega\FaultManager\Plugins;
 

@@ -1,17 +1,24 @@
 <?php
 
-declare(strict_types = 1);
-
 /**
  * Author: panosru
  * Date: 22/04/2018
  * Time: 19:29
  */
 
+declare(strict_types=1);
+
 namespace Omega\FaultManagerTests;
 
+use League\Flysystem\Filesystem;
+use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+use Omega\FaultManager\Exceptions\BaseError;
+use Omega\FaultManager\Exceptions\EventHandlerAlreadyExists;
+use Omega\FaultManager\Exceptions\ExceptionNameIsEmpty;
+use Omega\FaultManager\Exceptions\NamespaceError;
 use Omega\FaultManager\Fault;
 use PHPUnit\Framework\TestCase;
+use const Omega\FaultManager\Exceptions\InvalidCompilePath;
 
 /**
  * Class FaultTest
@@ -19,7 +26,7 @@ use PHPUnit\Framework\TestCase;
  */
 class FaultTest extends TestCase
 {
-    use \Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
+    use MockeryPHPUnitIntegration;
 
     /** @var string */
     private const TESTNIG_CUSTOM_EXCEPTION = 'MyCustomTestingException';
@@ -30,10 +37,10 @@ class FaultTest extends TestCase
     /** @var string */
     private const TESTING_CUSTOM_NAMESPACED_EXCEPTION = 'MyCustomNamespace\MyCustomException';
 
-    /** @var array */
+    /** @var array|null */
     private $testingFiles;
 
-    /** @var \League\Flysystem\Filesystem */
+    /** @var \League\Flysystem\Filesystem|null */
     private $fileSystem;
 
     /**
@@ -50,17 +57,34 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \BadMethodCallException
-     * @expectedExceptionMessage bad method call
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function throwsExceptionThatIsAlreadyDefined(): void
     {
+        $this->expectException(\BadMethodCallException::class);
+        $this->expectExceptionMessage("bad method call");
+
         throw Fault::exception(\BadMethodCallException::class, 'bad method call');
     }
 
     /**
      * @test
      * @covers ::exception()
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function doNotCompileAlreadyDefinedExceptions(): void
     {
@@ -72,12 +96,21 @@ class FaultTest extends TestCase
      * @test
      * @covers ::exception()
      * @covers ::fileSystem()
-     * @expectedException \MyCustomTestingException
-     * @expectedExceptionMessage custom exception message
-     * @expectedExceptionCode 666
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function throwsCustomException(): void
     {
+        $this->expectException(\MyCustomTestingException::class);
+        $this->expectExceptionMessage("custom exception message");
+        $this->expectExceptionCode(666);
+
         throw Fault::exception(
             self::TESTNIG_CUSTOM_EXCEPTION,
             'custom exception message',
@@ -88,10 +121,19 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Exception
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function customExceptionsAreInstanceOfPhpBuildInExceptionByDefault(): void
     {
+        $this->expectException(\Exception::class);
+
         throw Fault::exception(self::TESTNIG_CUSTOM_EXCEPTION);
     }
 
@@ -99,18 +141,28 @@ class FaultTest extends TestCase
      * @test
      * @covers ::exception()
      * @coversDefaultClass \Omega\FaultManager\Abstracts\FaultManagerException
-     * @expectedException \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
-     * @expectedExceptionMessage Exception class must not be empty.
-     * @expectedExceptionCode 66002
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function throwsExistingNamespacedException(): void
     {
-        throw Fault::exception(\Omega\FaultManager\Exceptions\ExceptionNameIsEmpty::class);
+        $this->expectException(ExceptionNameIsEmpty::class);
+        $this->expectExceptionMessage("Exception class must not be empty.");
+        $this->expectExceptionCode(66002);
+
+        throw Fault::exception(ExceptionNameIsEmpty::class);
     }
 
     /**
      * @test
      * @coversNothing
+     * @throws \ReflectionException
      */
     public function eventStreamIsDisabledByDefault(): void
     {
@@ -142,6 +194,7 @@ class FaultTest extends TestCase
      * @test
      * @covers ::registerHandler()
      * @covers ::unregisterHandler()
+     * @throws \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
      */
     public function registerAndUnregisterEventHandler(): void
     {
@@ -163,10 +216,11 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::registerHandler()
-     * @expectedException \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
      */
     public function registerExistingEventHandlerWithoutOverride(): void
     {
+        $this->expectException(EventHandlerAlreadyExists::class);
+
         $eventId = 'TestEventId';
         $handlerMock = \Mockery::mock(\Omega\FaultManager\Interfaces\FaultManagerEventHandler::class);
 
@@ -177,6 +231,7 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::registerHandler()
+     * @throws \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
      */
     public function registerExistingEventHandlerWithOverride(): void
     {
@@ -200,6 +255,15 @@ class FaultTest extends TestCase
      * @covers ::registerHandler()
      * @covers ::exception()
      * @covers ::eventStreamHandler()
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\EventHandlerAlreadyExists
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function registerEventHandler(): void
     {
@@ -221,10 +285,19 @@ class FaultTest extends TestCase
      * @test
      * @covers ::registerEvent()
      * @covers ::exception()
-     * @expectedException \Exception
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function routeToEventStreamNonEventException(): void
     {
+        $this->expectException(\Exception::class);
+
         Fault::enableEventStream();
 
         $exceptionMessage = 'bad message passed to event from non event exception!';
@@ -256,10 +329,19 @@ class FaultTest extends TestCase
     /**
      * @test
      * @coversNothing
-     * @expectedException \MyCustomTestingEventException
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function checkIfCustomEventPassedToEventStream(): void
     {
+        $this->expectException(\MyCustomTestingEventException::class);
+
         Fault::enableEventStream();
 
         $exceptionMessage = 'bad message passed to event.';
@@ -291,10 +373,19 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \MyCustomTestingEventException
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function customExceptionIsInstanceOfFaultExceptionWhenEventStreamIsEnabled(): void
     {
+        $this->expectException(\MyCustomTestingEventException::class);
+
         Fault::enableEventStream();
         $exception = Fault::exception(self::TESTING_CUSTOM_EVENT_EXCEPTION);
 
@@ -306,32 +397,59 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function throwsExceptionIfNamespacedCustomExceptionIsProvided(): void
     {
+        $this->expectException(NamespaceError::class);
+
         throw Fault::exception(self::TESTING_CUSTOM_NAMESPACED_EXCEPTION);
     }
 
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function throwsExceptionIfNoExceptionNameIsGiven(): void
     {
+        $this->expectException(\Omega\FaultManager\Exceptions\ExceptionNameIsEmpty::class);
+
         throw Fault::exception('');
     }
 
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Omega\FaultManager\Exceptions\BaseError
-     * @expectedExceptionMessage The class "NonThrowableMockException" does not implements Throwable interface.
-     * @expectedExceptionCode 66001
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function classIsNotThrowableThusAnExceptionMustBeThrown(): void
     {
+        $this->expectException(BaseError::class);
+        $this->expectExceptionMessage('The class "NonThrowableMockException" does not implements Throwable interface.');
+        $this->expectExceptionCode(66001);
+
         \Mockery::mock('NonThrowableMockException');
 
         throw Fault::exception('NonThrowableMockException');
@@ -340,35 +458,62 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::exception()
-     * @expectedException \Exception
-     * @expectedExceptionMessage bad message
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function interpolateNonEventExceptionMessage(): void
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("bad message");
+
         throw Fault::exception(\Exception::class, 'bad %s', 0, null, ['message']);
     }
 
     /**
      * @test
      * @covers ::throw()
-     * @expectedException \Exception
-     * @expectedExceptionMessage bad message
-     * @expectedExceptionCode 0
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function checkThrowsMethod(): void
     {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("bad message");
+        $this->expectExceptionCode(0);
+
         Fault::throw(\Exception::class, 'bad message');
     }
 
     /**
      * @test
      * @covers ::throw()
-     * @expectedException \MyCustomTestingEventException
-     * @expectedExceptionMessage hello world
-     * @expectedExceptionCode 66000
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function throwEventExceptionWithArguments(): void
     {
+        $this->expectException(\MyCustomTestingEventException::class);
+        $this->expectExceptionMessage("hello world");
+        $this->expectExceptionCode(66000);
+
         Fault::enableEventStream();
         Fault::throw(
             self::TESTING_CUSTOM_EVENT_EXCEPTION,
@@ -383,6 +528,7 @@ class FaultTest extends TestCase
      * @test
      * @covers ::setCompilePath()
      * @covers ::compilePath()
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
     public function checkCompilePath(): void
     {
@@ -393,12 +539,14 @@ class FaultTest extends TestCase
     /**
      * @test
      * @covers ::setCompilePath()
-     * @expectedException \Omega\FaultManager\Exceptions\InvalidCompilePath
-     * @expectedExceptionMessage Path "/some/invalid/path/" does not exist or is not writable.
-     * @expectedExceptionCode 66004
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
     public function handleInvalidPath(): void
     {
+        $this->expectException(InvalidCompilePath::class);
+        $this->expectExceptionMessage('Path "/some/invalid/path/" does not exist or is not writable.');
+        $this->expectExceptionCode(66004);
+
         Fault::setCompilePath('/some/invalid/path');
     }
 
@@ -407,6 +555,7 @@ class FaultTest extends TestCase
      * @covers ::autoloadCompiledExceptions()
      * @covers ::loadCustomException()
      * @runInSeparateProcess
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
      */
     public function checkAutoloader(): void
     {
@@ -444,6 +593,14 @@ class FaultTest extends TestCase
      * @covers ::loadCustomException()
      * @covers ::generateFileCode()
      * @runInSeparateProcess
+     * @throws \Hoa\Event\Exception
+     * @throws \Omega\FaultManager\Abstracts\FaultManagerException
+     * @throws \Omega\FaultManager\Exceptions\BaseError
+     * @throws \Omega\FaultManager\Exceptions\ExceptionNameIsEmpty
+     * @throws \Omega\FaultManager\Exceptions\InvalidCompilePath
+     * @throws \Omega\FaultManager\Exceptions\NamespaceError
+     * @throws \ReflectionException
+     * @throws \Throwable
      */
     public function checkCompiler(): void
     {
@@ -504,7 +661,6 @@ class FaultTest extends TestCase
     /**
      * @after
      * @throws \League\Flysystem\FileNotFoundException
-     * @throws \ReflectionException
      */
     protected function checkIfTestingExceptionAlreadyExistsAndDeleteIt(): void
     {
