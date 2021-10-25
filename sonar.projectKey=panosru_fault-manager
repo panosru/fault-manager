@@ -1,1 +1,2 @@
 sonar.projectKey=panosru_fault-manager
+sonar.python.version=3
